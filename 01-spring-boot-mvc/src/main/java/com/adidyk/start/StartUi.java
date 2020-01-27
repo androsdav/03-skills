@@ -1,4 +1,4 @@
-package com.adidyk;
+package com.adidyk.start;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
