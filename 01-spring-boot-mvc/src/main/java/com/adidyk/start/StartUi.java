@@ -1,5 +1,7 @@
 package com.adidyk.start;
 
+import com.adidyk.controller.UserController;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -34,10 +36,10 @@ public class StartUi {
      */
     public  static void main(String[] arg) {
         System.out.println("viber-bot");
-        System.getProperties().put("server.port", 8081);
         SpringApplication.run(StartUi.class, arg);
     }
 
+    /*
 
     @EventListener(ApplicationReadyEvent.class)
     public void testJpaMethods() {
@@ -115,8 +117,8 @@ public class StartUi {
         item.setCompany("nokia");
         System.out.println(this.service.findAllByCompany(item));
         */
+/*
 
-
-    }
+    }*/
 
 }

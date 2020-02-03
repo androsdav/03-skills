@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form action="#" th:action="@{/saveUser}" th:object="${user}" method="post">
+        <label for="Login">Login</label>
+        <input type="text" th:field="*{login}" id="login" placeholder="Login">
+        <span th:if="${#fields.hasErrors('login')}" th:errors="*{Login}"></span>
+        <label for="password">Email</label>
+        <input type="text" th:field="*{password}" id="password" placeholder="password">
+        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+        <input type="submit" value="save user">
+    </form>
+</body>
+</html>

@@ -1,6 +1,7 @@
 package com.adidyk.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 
 /**
@@ -24,12 +25,14 @@ public class User {
      * @param login - user login.
      */
     @Column(name = "login")
+    @NotBlank(message = "login is mandatory")
     private String login;
 
     /**
      * @param password - user password.
      */
     @Column(name = "password")
+    @NotBlank(message = "password is mandatory")
     private String password;
 
     /**
