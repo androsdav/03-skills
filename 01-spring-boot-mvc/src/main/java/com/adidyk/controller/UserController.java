@@ -5,7 +5,7 @@ import com.adidyk.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -31,16 +31,50 @@ public class UserController {
         this.service = service;
     }
 
+
+    /**
+     * showSaveUserForm - show save user form.
+     * @return - returns save-user.
+     */
+    @RequestMapping(value = "/showSaveUserForm")
+    public String showSaveUserForm(User user) {
+        return "save-user";
+    }
+
     /**
      * addUser - adds user.
      * @param user - user.
      * @param result - result.
-     * @param model - model.
      * @return - returns page.
      */
-    @PostMapping("/saveUser")
+    @RequestMapping(value = "/saveUser", method = RequestMethod.POST)
     public String saveUser(@Valid User user, BindingResult result, Model model) {
+        String url = "index";
+        if (result.hasErrors()) {
+            url = "save-user";
+        }
         this.service.save(user);
+        model.addAttribute("user", user);
+        //model.addAttribute("users", this.service.findAll());
+        return "index";
+    }
+
+    /**
+     * findAllUser - finds all users.
+     * @return - returns all users.
+     */
+    @RequestMapping(value = "/findAllUser", method = RequestMethod.GET)
+    public String findAllUser(Model model) {
+        model.addAttribute("users", this.service.findAll());
+        return "find-all-user";
+    }
+
+    /**
+     * index - index.
+     * @return - returns index.
+     */
+    @RequestMapping(value = "/back-to-index", method = RequestMethod.GET)
+    public String index() {
         return "index";
     }
 

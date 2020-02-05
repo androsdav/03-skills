@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h2>Users</h2>
+
+<table border="1" style="border-color: revert; background: darkgray;">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>login</th>
+        <th>password</th>
+        <th>test by id</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.login}"></td>
+        <td th:text="${user.password}"></td>
+        <td th:switch="${user.id}">
+            <span th:case="'1'" th:text="first"></span>
+            <span th:case="'2'" th:text="second"></span>
+            <span th:case="'3'" th:text="third"></span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="/back-to-index">back</a>
+</body>
+</html>

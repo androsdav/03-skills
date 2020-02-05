@@ -5,6 +5,8 @@ import com.adidyk.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Class UserService.
  * @author Didyk Andrey (androsdav@gmail.com).
@@ -34,6 +36,14 @@ public class UserService {
      */
     public void save(User user) {
         this.repository.save(user);
+    }
+
+    /**
+     * findAll - returns all users.
+     * @return - returns all users.
+     */
+    public List<User> findAll() {
+        return this.repository.findAll();
     }
 
 }

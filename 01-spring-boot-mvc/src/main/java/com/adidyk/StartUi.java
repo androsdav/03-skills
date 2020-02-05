@@ -1,11 +1,7 @@
-package com.adidyk.start;
+package com.adidyk;
 
-import com.adidyk.controller.UserController;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
 
 /**
  * Class StartUi.

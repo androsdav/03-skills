@@ -1,18 +1,73 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-    <form action="#" th:action="@{/saveUser}" th:object="${user}" method="post">
-        <label for="Login">Login</label>
-        <input type="text" th:field="*{login}" id="login" placeholder="Login">
-        <span th:if="${#fields.hasErrors('login')}" th:errors="*{Login}"></span>
-        <label for="password">Email</label>
-        <input type="text" th:field="*{password}" id="password" placeholder="password">
-        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
-        <input type="submit" value="save user">
+<!--
+<form th:action="@{/saveUser}" th:object="${user}" method="POST">
+    First Name:
+    <input type="text" th:field="*{login}" />
+    <br/>
+    Last Name:
+    <input type="text" th:field="*{password}" />
+    <br/>
+    <input type="submit" value="Create" />
+</form>
+-->
+<form action="#" th:action="@{/saveUser}" th:object="${user}" method="post">
+    <label for="name">Name</label>
+    <input type="text" th:field="*{name}" id="name" placeholder="Name">
+    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+    <label for="email">Email</label>
+    <input type="text" th:field="*{email}" id="email" placeholder="Email">
+    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+    <input type="submit" value="Add User">
+</form>
+
+<!--
+
+<form action="#" action="/saveUser" th:object="${user}" method="post">
+    <table border="1">
+        <tr>
+            <td><label th:text="#{id}" /></td>
+            <td><input type="number" th:field="*{id}" /></td>
+        </tr>
+        <tr>
+            <td><label th:text="#{login}" /></td>
+            <td><input type="text" th:field="*{login}" /></td>
+        </tr>
+        <tr>
+            <td><label th:text="#{password}" /></td>
+            <td><input type="text" th:field="*{password}" /></td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Submit" /></td>
+        </tr>
+    </table>
+</form>-->
+
+
+<!--
+<form action="#" th:action="@{/saveUser}" th:object="${user}" method="post">
+
+    <label for="login">Name</label>
+    <input type="text" th:field="*{login}" id="login" placeholder="login"> -->
+
+<!--<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>-->
+
+<!--
+    <label for="password">Email</label>
+    <input type="text" th:field="*{password}" id="password" placeholder="password">
+    -->
+
+<!--<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>-->
+<!--
+        <input type="submit" value="Add User">
     </form>
+-->
+
+
 </body>
 </html>

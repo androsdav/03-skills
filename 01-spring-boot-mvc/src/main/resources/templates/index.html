@@ -1,10 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-    TEST
+
+
+<a href="/findAllUser">1. Show all user.</a> </br>
+<a href="/showSaveUserForm">2. Add new user.</a>
+
+    <!--
+    <form action="#" th:action="@{/saveUser}" th:object="${user}" method="post">
+
+        <label for="login">Name</label>
+        <input type="text" th:field="*{login}" id="login" placeholder="login"> -->
+
+        <!--<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>-->
+
+    <!--
+        <label for="password">Email</label>
+        <input type="text" th:field="*{password}" id="password" placeholder="password">
+        -->
+
+        <!--<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>-->
+<!--
+        <input type="submit" value="Add User">
+    </form>
+-->
+
+
 </body>
 </html>
