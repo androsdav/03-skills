@@ -36,9 +36,10 @@ public class UserController {
      * showSaveUserForm - show save user form.
      * @return - returns save-user.
      */
-    @RequestMapping(value = "/showSaveUserForm")
-    public String showSaveUserForm(User user) {
-        return "save-user";
+    @RequestMapping(value = "/saveUser1", method = RequestMethod.GET)
+    public String showSaveUserForm(Model model) {
+        model.addAttribute("user", new User());
+        return "index";
     }
 
     /**
@@ -48,25 +49,26 @@ public class UserController {
      * @return - returns page.
      */
     @RequestMapping(value = "/saveUser", method = RequestMethod.POST)
-    public String saveUser(@Valid User user, BindingResult result, Model model) {
+    public String saveUser(@Valid @ModelAttribute("user") User user, BindingResult result, Model model) {
         String url = "index";
         if (result.hasErrors()) {
             url = "save-user";
         }
         this.service.save(user);
-        model.addAttribute("user", user);
-        //model.addAttribute("users", this.service.findAll());
-        return "index";
+        //model.addAttribute("user", user);
+        model.addAttribute("users", this.service.findAll());
+        return url;
     }
 
     /**
      * findAllUser - finds all users.
      * @return - returns all users.
      */
-    @RequestMapping(value = "/findAllUser", method = RequestMethod.GET)
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String findAllUser(Model model) {
         model.addAttribute("users", this.service.findAll());
-        return "find-all-user";
+        model.addAttribute("user", new User());
+        return "index";
     }
 
     /**

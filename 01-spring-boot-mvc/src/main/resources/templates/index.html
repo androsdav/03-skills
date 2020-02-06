@@ -7,9 +7,62 @@
 <body>
 
 
-<a href="/findAllUser">1. Show all user.</a> </br>
-<a href="/showSaveUserForm">2. Add new user.</a>
 
+
+
+
+<a href="/findAllUser">1. Show all user.</a> </br>
+<a href="/saveUser1">2. Add new user.</a>
+
+
+<form action="/saveUser" th:object="${user}" method="post">
+    <label for="login">login</label>
+    <input type="text" th:field="*{login}" id="login" placeholder="login">
+    <span th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></span>
+    <label for="password">password</label>
+    <input type="text" th:field="*{password}" id="password" placeholder="password">
+    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+    <input type="submit" value="Add User">
+
+</form>
+
+
+<table border="1" style="border-color: revert; background: darkgray;">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>login</th>
+        <th>password</th>
+        <th>test by id</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.login}"></td>
+        <td th:text="${user.password}"></td>
+        <td th:switch="${user.id}">
+            <span th:case="'1'" th:text="first"></span>
+            <span th:case="'2'" th:text="second"></span>
+            <span th:case="'3'" th:text="third"></span>
+        </td>
+    </tr>
+    </tbody>
+
+
+
+<!--
+<form action="/saveUser" th:object="${user}" method="post">
+    <label for="login">login</label>
+    <input type="text" th:field="*{login}" id="login" placeholder="login">
+    <span th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></span>
+    <label for="password">password</label>
+    <input type="text" th:field="*{password}" id="password" placeholder="password">
+    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+    <input type="submit" value="Add User">
+
+</form>-->
     <!--
     <form action="#" th:action="@{/saveUser}" th:object="${user}" method="post">
 
