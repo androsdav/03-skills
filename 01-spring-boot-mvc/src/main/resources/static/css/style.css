@@ -1,0 +1,77 @@
+.tabsDynamicHeight md-content h1:first-child {
+    margin-top: 0px;
+}
+
+.position {
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+hr {
+    border: none;
+    background-color: darkgray;
+    color: darkgray;
+    height: 1px;
+}
+
+.admin {
+    /*width: 200px;*/
+    //background: #ccc;
+    /*padding: 5px;*/
+    margin: 0px 30px 0px 30px;
+    padding: 0px 0px 0px 0px;
+
+    /*border: 10px blue;*/
+    /*float: left;*/
+}
+.admin_save {
+    margin: 0px 0px 0px 0px;
+    padding: 0px 20px 0px 20px;
+
+}
+
+.admin_find_by_id {
+    margin: 0px 0px 0px 0px;
+    padding: 20px 20px 0px 20px;
+}
+
+.admin_update {
+    margin: 0px 0px 0px 0px;
+    padding: 20px 20px 0px 20px;
+}
+
+.admin_delete_and_find_all_smart_phone {
+    margin: 0px 0px 0px 0px;
+    padding: 20px 20px 0px 20px;
+}
+
+.admin_action_legend {
+    font-weight: bold;
+    text-align: left;
+    color: crimson
+}
+
+.admin_action_message {
+    font-weight: bold;
+    text-align: left;
+    color: #7565b7
+}
+
+.message {
+    font-weight: bold;
+    text-align: left;
+    color: #dea093;
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 20px;
+}
+
+
+
+
+
+/*
+Copyright 2018 Google LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that can be found
+in the LICENSE file at http://material.angularjs.org/HEAD/license.
+*/

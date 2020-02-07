@@ -2,6 +2,7 @@ package com.adidyk.controller;
 
 import com.adidyk.model.User;
 import com.adidyk.service.UserService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,23 +24,15 @@ public class UserController {
      */
     private UserService service;
 
+    @Value("${error.addFormIsEmpty}")
+    private String addFormIsEmpty;
+
     /**
      * UserController - constructor.
      * @param service - service.
      */
     UserController(UserService service) {
         this.service = service;
-    }
-
-
-    /**
-     * showSaveUserForm - show save user form.
-     * @return - returns save-user.
-     */
-    @RequestMapping(value = "/saveUser1", method = RequestMethod.GET)
-    public String showSaveUserForm(Model model) {
-        model.addAttribute("user", new User());
-        return "index";
     }
 
     /**
@@ -49,34 +42,24 @@ public class UserController {
      * @return - returns page.
      */
     @RequestMapping(value = "/saveUser", method = RequestMethod.POST)
-    public String saveUser(@Valid @ModelAttribute("user") User user, BindingResult result, Model model) {
-        String url = "index";
+    public String saveUser(@Valid @ModelAttribute User user, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            url = "save-user";
+            model.addAttribute("errorMessage", addFormIsEmpty);
+        } else {
+            this.service.save(user);
         }
-        this.service.save(user);
-        //model.addAttribute("user", user);
         model.addAttribute("users", this.service.findAll());
-        return url;
+        return "index";
     }
 
     /**
      * findAllUser - finds all users.
      * @return - returns all users.
      */
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String findAllUser(Model model) {
         model.addAttribute("users", this.service.findAll());
         model.addAttribute("user", new User());
-        return "index";
-    }
-
-    /**
-     * index - index.
-     * @return - returns index.
-     */
-    @RequestMapping(value = "/back-to-index", method = RequestMethod.GET)
-    public String index() {
         return "index";
     }
 

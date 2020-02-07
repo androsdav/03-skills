@@ -1,87 +1,87 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Spring Boot MVC</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+    <link rel='stylesheet' href='https://gitcdn.xyz/cdn/angular/bower-material/v1.1.20/angular-material.css'>
+    <link rel='stylesheet' href='https://material.angularjs.org/1.1.20/docs.css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
 
-
-
-
-
-
-<a href="/findAllUser">1. Show all user.</a> </br>
-<a href="/saveUser1">2. Add new user.</a>
-
-
-<form action="/saveUser" th:object="${user}" method="post">
-    <label for="login">login</label>
-    <input type="text" th:field="*{login}" id="login" placeholder="login">
-    <span th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></span>
-    <label for="password">password</label>
-    <input type="text" th:field="*{password}" id="password" placeholder="password">
-    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
-    <input type="submit" value="Add User">
-
-</form>
-
-
-<table border="1" style="border-color: revert; background: darkgray;">
-    <thead>
-    <tr>
-        <th>id</th>
-        <th>login</th>
-        <th>password</th>
-        <th>test by id</th>
-    </tr>
-    </thead>
-    <tbody>
-
-    <tr th:each="user : ${users}">
-        <td th:text="${user.id}"></td>
-        <td th:text="${user.login}"></td>
-        <td th:text="${user.password}"></td>
-        <td th:switch="${user.id}">
-            <span th:case="'1'" th:text="first"></span>
-            <span th:case="'2'" th:text="second"></span>
-            <span th:case="'3'" th:text="third"></span>
-        </td>
-    </tr>
-    </tbody>
-
-
-
-<!--
-<form action="/saveUser" th:object="${user}" method="post">
-    <label for="login">login</label>
-    <input type="text" th:field="*{login}" id="login" placeholder="login">
-    <span th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></span>
-    <label for="password">password</label>
-    <input type="text" th:field="*{password}" id="password" placeholder="password">
-    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
-    <input type="submit" value="Add User">
-
-</form>-->
+<div class="admin">
+    <!--------------------------- select type and save product ---------------------------->
+    <div class="admin_save">
+        <form action="/saveUser" th:object="${user}" method="post">
+            <fieldset>
+                <legend><h5 class="admin_action_legend">save user</h5></legend>
+                <div class="form-inline">
+                    <div class="form-group">
+                        <div class="col-md-8">
+                            <input id="login" class="form-control" type="text" th:field="*{login}" placeholder = "login"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-8">
+                            <input id="password" class="form-control" type="text" th:field="*{password}" placeholder = "password"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-8">
+                            <button class="btn btn-default">save</button>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="message">
+                <fieldset>
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <div class="col-md-80">
+                                <span th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></span>
+                                <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </form>
+    </div>
     <!--
-    <form action="#" th:action="@{/saveUser}" th:object="${user}" method="post">
-
-        <label for="login">Name</label>
-        <input type="text" th:field="*{login}" id="login" placeholder="login"> -->
-
-        <!--<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>-->
-
-    <!--
-        <label for="password">Email</label>
-        <input type="text" th:field="*{password}" id="password" placeholder="password">
-        -->
-
-        <!--<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>-->
-<!--
-        <input type="submit" value="Add User">
-    </form>
--->
-
+    <div th:if="${errorMessage}" th:utext="${errorMessage}" style="color:red;font-style:italic;">
+    </div>-->
+    <!------------------------ delete and find all product by type ------------------------>
+    <div class="admin_delete_and_find_all_smart_phone">
+        <form>
+            <fieldset>
+                <legend><h5 class="admin_action_legend">get all user and delete user by id</h5></legend>
+                <div>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>login</th>
+                            <th>password</th>
+                            <th>delete by id</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="user : ${users}">
+                            <td th:text="${user.id}"></td>
+                            <td th:text="${user.login}"></td>
+                            <td th:text="${user.password}"></td>
+                            <td> delete user by id </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
 
 </body>
 </html>

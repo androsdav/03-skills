@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "addFormIsEmpty",
+      "type": "java.lang.String",
+      "description": "Description for addFormIsEmpty."
+  }
+] }
