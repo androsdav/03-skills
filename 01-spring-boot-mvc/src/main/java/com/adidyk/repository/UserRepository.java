@@ -12,4 +12,12 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface  UserRepository extends JpaRepository<User, Integer> {
+
+    /**
+     * findByLogin - find user by login.
+     * @param login - user login.
+     * @return - return true or false.
+     */
+    User findByLogin(String login);
+
 }

@@ -34,8 +34,25 @@ public class UserService {
      * save - adds user.
      * @param user - user.
      */
-    public void save(User user) {
-        this.repository.save(user);
+    public User save(User user) {
+        return this.repository.save(user);
+    }
+
+    /**
+     * findByLogin - finds user by login and returns.
+     * @param user - user.
+     * @return - returns user.
+     */
+    public User findByLogin(User user) {
+        return this.repository.findByLogin(user.getLogin());
+    }
+
+    /**
+     * deleteById - delete by id.
+     * @param user - user.
+     */
+    public void deleteById(User user) {
+        this.repository.deleteById(user.getId());
     }
 
     /**

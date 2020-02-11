@@ -15,18 +15,18 @@
 <div class="admin">
     <!--------------------------- select type and save product ---------------------------->
     <div class="admin_save">
-        <form action="/saveUser" th:object="${user}" method="post">
+        <form action="/save-user" th:object="${user}" method="post">
             <fieldset>
                 <legend><h5 class="admin_action_legend">save user</h5></legend>
                 <div class="form-inline">
                     <div class="form-group">
                         <div class="col-md-8">
-                            <input id="login" class="form-control" type="text" th:field="*{login}" placeholder = "login"/>
+                            <input id="login" class="form-control" type="text" th:field="${user.login}" placeholder = "login"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-8">
-                            <input id="password" class="form-control" type="text" th:field="*{password}" placeholder = "password"/>
+                            <input id="password" class="form-control" type="text" th:field="${user.password}" placeholder = "password"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -43,6 +43,7 @@
                             <div class="col-md-80">
                                 <span th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></span>
                                 <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+                                <span th:if="${message}" th:text="${message}"></span>
                             </div>
                         </div>
                     </div>
@@ -50,9 +51,6 @@
             </div>
         </form>
     </div>
-    <!--
-    <div th:if="${errorMessage}" th:utext="${errorMessage}" style="color:red;font-style:italic;">
-    </div>-->
     <!------------------------ delete and find all product by type ------------------------>
     <div class="admin_delete_and_find_all_smart_phone">
         <form>
@@ -69,11 +67,44 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="user : ${users}">
-                            <td th:text="${user.id}"></td>
-                            <td th:text="${user.login}"></td>
-                            <td th:text="${user.password}"></td>
-                            <td> delete user by id </td>
+                        <tr th:each="user1 : ${users}">
+                            <td th:text="${user1.id}"></td>
+                            <td th:text="${user1.login}"></td>
+                            <td th:text="${user1.password}"></td>
+                            <!--<td><button class="btn btn-default" href="/deleteUser">-</button></td>-->
+                            <!--<td><a href="/deleteUser" th:method="post">delete</a></td>-->
+                            <!--<td><a href="/deleteUser">Delete</a></td>-->
+                            <td>
+                                <form action="/deleteUser" th:object="${user1}" method="post">
+
+                                    <fieldset>
+                                        <legend><h5 class="admin_action_legend">save user</h5></legend>
+                                        <div class="form-inline">
+                                            <div class="form-group">
+                                                <div class="col-md-8">
+                                                    <input class="form-control" type="text" th:field="${user1.id}" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-8">
+                                                    <input class="form-control" type="text" th:field="${user1.login}" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-8">
+                                                    <input class="form-control" type="text" th:field="${user1.password}" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-md-offset-2 col-md-8">
+                                                    <button class="btn btn-default">delete</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </form>
+
+                            </td>
                         </tr>
                         </tbody>
                     </table>

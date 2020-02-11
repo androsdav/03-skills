@@ -4,5 +4,10 @@
       "name": "addFormIsEmpty",
       "type": "java.lang.String",
       "description": "Description for addFormIsEmpty."
-  }
-] }
+    },
+    {
+      "name": "newUserNotAdded",
+      "type": "java.lang.String",
+      "description": "Description for newUserNotAdded."
+    }
+  ] }
