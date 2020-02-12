@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Class UserService.
@@ -45,6 +46,24 @@ public class UserService {
      */
     public User findByLogin(User user) {
         return this.repository.findByLogin(user.getLogin());
+    }
+
+    /**
+     * findById - find user by id.
+     * @param user - user.
+     * @return - returns user.
+     */
+    public User findById(User user) {
+        return this.repository.findById(user.getId()).orElse(null);
+
+    }
+
+    /**
+     * updateUser - update user.
+     * @param user - user.
+     */
+    public void updateById(User user) {
+        this.save(user);
     }
 
     /**

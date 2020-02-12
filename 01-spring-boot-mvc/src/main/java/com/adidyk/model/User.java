@@ -48,6 +48,14 @@ public class User {
     }
 
     /**
+     * User - constructor.
+     * @param id - user id.
+     */
+    public User(int id) {
+        this.id = id;
+    }
+
+    /**
      * getId - returns user id.
      * @return - returns user id.
      */

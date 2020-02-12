@@ -11,14 +11,10 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
-
 <div class="admin">
     <!--------------------------- select type and save product ---------------------------->
     <div class="admin_save">
-        <a th:href="@{/saveUser}">save new user</a>
-
-        <!--
-        <form action="#" th:action="@{/saveUser}"  th:object="${user}" method="post">
+        <form action="#" th:action="@{/updateUser}"  th:object="${user}" method="post">
             <fieldset>
                 <legend><h5 class="admin_action_legend">save user</h5></legend>
                 <div class="form-inline">
@@ -52,37 +48,6 @@
                     </div>
                 </fieldset>
             </div>
-        </form>
-        -->
-    </div>
-    <!------------------------ delete and find all product by type ------------------------>
-    <div class="admin_delete_and_find_all_smart_phone">
-        <form>
-            <fieldset>
-                <legend><h5 class="admin_action_legend">get all user and delete user by id</h5></legend>
-                <div>
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>id</th>
-                            <th>login</th>
-                            <th>password</th>
-                            <th>delete</th>
-                            <th>update</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="user : ${users}">
-                            <td th:text="${user.id}"></td>
-                            <td th:text="${user.login}"></td>
-                            <td th:text="${user.password}"></td>
-                            <td><a th:href="@{/deleteUser/{id}(id=${user.id})}">delete</a></td>
-                            <td><a th:href="@{/updateUser/{id}(id=${user.id})}">update</a></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </fieldset>
         </form>
     </div>
 </div>

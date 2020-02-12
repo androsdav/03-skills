@@ -44,44 +44,93 @@ public class UserController {
      * addUser - adds user.
      * @return - returns page.
      */
-    /*
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/saveUser", method = RequestMethod.GET)
     public String saveUser(Model model) {
-        model.addAttribute("saveUser", new User());
+        model.addAttribute("user", new User());
+        model.addAttribute("message");
+        return "save";
+    }
+
+    /**
+     * addUser - adds user.
+     * @param user - user.
+     * @param result - result.
+     * @return - returns page.
+     */
+    @RequestMapping(value = "/saveUser", method = RequestMethod.POST)
+    public String saveUser(@Valid User user, BindingResult result, Model model) {
+        String url;
+        if (result.hasErrors()) {
+            url = "save";
+        } else {
+            if (this.service.findByLogin(user) == null) {
+                if (this.service.save(user) != null) {
+                    model.addAttribute("message", newUserAdded);
+                    url = "index";
+                } else {
+                    model.addAttribute("message", newUserNotAdded);
+                    url = "save";
+                }
+            } else {
+                model.addAttribute("message", enteredLoginIsDuplicated);
+                url = "save";
+            }
+        }
+        model.addAttribute("users", this.service.findAll());
+        return url;
+    }
+
+    /**
+     * addUser - adds user.
+     * @return - returns page.
+     */
+    @RequestMapping(value = "/updateUser/{id}", method = RequestMethod.GET)
+    public String updateUser(@PathVariable("id") int id, Model model) {
+        User user = this.service.findById(new User(id));
+        model.addAttribute("user", user;
+        model.addAttribute("message");
+        return "update";
+    }
+
+    /**
+     * addUser - adds user.
+     * @return - returns page.
+     */
+    @RequestMapping(value = "/updateUser", method = RequestMethod.POST)
+    public String updateUser(@Valid User user, Model model) {
+        User user = this.service.findById(new User(id));
+        model.addAttribute("user", user;
+        model.addAttribute("message");
+        return "update";
+    }
+
+
+    /**
+     *
+     * @param user - user.
+     * @param result - result.
+     * @param model - model.
+     * @return - return index.
+     */
+    /*
+    @RequestMapping(value = "/updateUser", method = RequestMethod.POST)
+    public String updateUser(@Valid User user, BindingResult result, Model model) {
         return "index";
+
     }
     */
 
     /**
-     * addUser - adds user.
-     * @param saveUser - user.
-     * @param result - result.
-     * @return - returns page.
+     * deleteUserById - delete user by id.
+     * @param id - user id.
+     * @param model - model.
+     * @return - return index.
      */
-    @RequestMapping(value = "/save-user", method = RequestMethod.POST)
-    public String saveUser(@Valid User saveUser, BindingResult result, Model model) {
-        if (!result.hasErrors()) {
-            if (this.service.findByLogin(saveUser) == null) {
-                if (this.service.save(saveUser) != null) {
-                    model.addAttribute("message", newUserAdded);
-                } else {
-                    model.addAttribute("message", newUserNotAdded);
-                }
-            } else {
-                model.addAttribute("message", enteredLoginIsDuplicated);
-            }
-        }
+    @RequestMapping(value = "/deleteUser/{id}", method = RequestMethod.GET)
+    public String deleteUserById(@PathVariable("id") int id, Model model, User user) {
+        this.service.deleteById(new User(id));
         model.addAttribute("users", this.service.findAll());
-        return "index";
-    }
-
-    @RequestMapping(value = "/deleteUser", method = RequestMethod.POST)
-    public String deleteUserById(@Valid User user, BindingResult result, Model model) {
-        System.out.println();
-        System.out.println("user: " + user);
-        System.out.println();
-        this.service.deleteById(user);
-        model.addAttribute("users", this.service.findAll());
+        model.addAttribute("user", new User());
         return "index";
     }
 
@@ -93,7 +142,7 @@ public class UserController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String findAllUser(Model model) {
         model.addAttribute("users", this.service.findAll());
-        model.addAttribute("user", new User());
+        model.addAttribute("user", new User(12, "test", "test"));
         return "index";
     }
 
