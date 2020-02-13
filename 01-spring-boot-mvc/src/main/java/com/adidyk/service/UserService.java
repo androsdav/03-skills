@@ -55,7 +55,6 @@ public class UserService {
      */
     public User findById(User user) {
         return this.repository.findById(user.getId()).orElse(null);
-
     }
 
     /**

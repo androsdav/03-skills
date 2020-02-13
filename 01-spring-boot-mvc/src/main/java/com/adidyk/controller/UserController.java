@@ -45,8 +45,8 @@ public class UserController {
      * @return - returns page.
      */
     @RequestMapping(value = "/saveUser", method = RequestMethod.GET)
-    public String saveUser(Model model) {
-        model.addAttribute("user", new User());
+    public String saveUser(Model model, User user) {
+        model.addAttribute("user", user);
         model.addAttribute("message");
         return "save";
     }
@@ -59,24 +59,26 @@ public class UserController {
      */
     @RequestMapping(value = "/saveUser", method = RequestMethod.POST)
     public String saveUser(@Valid User user, BindingResult result, Model model) {
+        String message = "";
         String url;
         if (result.hasErrors()) {
             url = "save";
         } else {
             if (this.service.findByLogin(user) == null) {
                 if (this.service.save(user) != null) {
-                    model.addAttribute("message", newUserAdded);
+                    message = newUserAdded;
                     url = "index";
                 } else {
-                    model.addAttribute("message", newUserNotAdded);
+                    message = newUserNotAdded;
                     url = "save";
                 }
             } else {
-                model.addAttribute("message", enteredLoginIsDuplicated);
+                message = enteredLoginIsDuplicated;
                 url = "save";
             }
         }
         model.addAttribute("users", this.service.findAll());
+        model.addAttribute("message", message);
         return url;
     }
 
@@ -87,7 +89,7 @@ public class UserController {
     @RequestMapping(value = "/updateUser/{id}", method = RequestMethod.GET)
     public String updateUser(@PathVariable("id") int id, Model model) {
         User user = this.service.findById(new User(id));
-        model.addAttribute("user", user;
+        model.addAttribute("user", user);
         model.addAttribute("message");
         return "update";
     }
@@ -98,27 +100,11 @@ public class UserController {
      */
     @RequestMapping(value = "/updateUser", method = RequestMethod.POST)
     public String updateUser(@Valid User user, Model model) {
-        User user = this.service.findById(new User(id));
-        model.addAttribute("user", user;
-        model.addAttribute("message");
-        return "update";
-    }
 
-
-    /**
-     *
-     * @param user - user.
-     * @param result - result.
-     * @param model - model.
-     * @return - return index.
-     */
-    /*
-    @RequestMapping(value = "/updateUser", method = RequestMethod.POST)
-    public String updateUser(@Valid User user, BindingResult result, Model model) {
+        this.service.updateById(user);
+        model.addAttribute("users", this.service.findAll());
         return "index";
-
     }
-    */
 
     /**
      * deleteUserById - delete user by id.
@@ -143,6 +129,7 @@ public class UserController {
     public String findAllUser(Model model) {
         model.addAttribute("users", this.service.findAll());
         model.addAttribute("user", new User(12, "test", "test"));
+        model.addAttribute("message");
         return "index";
     }
 

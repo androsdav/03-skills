@@ -11,12 +11,12 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
-<div class="admin">
-    <!--------------------------- select type and save product ---------------------------->
-    <div class="admin_save">
-        <form action="#" th:action="@{/saveUser}"  th:object="${user}" method="post">
+<div class="main">
+    <!--------------------------- save new user ---------------------------->
+    <div class="frame">
+        <form action="#" th:action="@{/saveUser}" th:object="${user}"  method="post">
             <fieldset>
-                <legend><h5 class="admin_action_legend">save user</h5></legend>
+                <legend><h5 class="action_legend">save user</h5></legend>
                 <div class="form-inline">
                     <div class="form-group">
                         <div class="col-md-8">
@@ -35,21 +35,25 @@
                     </div>
                 </div>
             </fieldset>
-            <div class="message">
+            <!----------------------------------------- message -------------------------------------------->
+            <div class="form_message">
                 <fieldset>
+                    <legend><h5 class="action_message">[message]:</h5></legend>
                     <div class="form-inline">
                         <div class="form-group">
                             <div class="col-md-80">
-                                <span th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></span>
-                                <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+                                <span th:if="${#fields.hasErrors('login')}" th:errors="${user.login}"></span>
+                                <span th:if="${#fields.hasErrors('password')}" th:errors="${user.password}"></span>
                                 <span th:if="${message}" th:text="${message}"></span>
                             </div>
                         </div>
                     </div>
                 </fieldset>
             </div>
+            <!---------------------------------------------------------------------------------------------->
         </form>
     </div>
+    <!---------------------------------------------------------------------------------------------->
 </div>
 
 </body>

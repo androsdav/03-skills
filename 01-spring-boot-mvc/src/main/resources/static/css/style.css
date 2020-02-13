@@ -15,47 +15,16 @@ hr {
     height: 1px;
 }
 
-.admin {
-    /*width: 200px;*/
+/*********************/
+.main {
     //background: #ccc;
-    /*padding: 5px;*/
-    margin: 0px 30px 0px 30px;
+    margin: 30px 30px 0px 30px;
     padding: 0px 0px 0px 0px;
-
-    /*border: 10px blue;*/
-    /*float: left;*/
 }
-.admin_save {
+
+.frame {
     margin: 0px 0px 0px 0px;
-    padding: 0px 20px 0px 20px;
-
-}
-
-.admin_find_by_id {
-    margin: 0px 0px 0px 0px;
-    padding: 20px 20px 0px 20px;
-}
-
-.admin_update {
-    margin: 0px 0px 0px 0px;
-    padding: 20px 20px 0px 20px;
-}
-
-.admin_delete_and_find_all_smart_phone {
-    margin: 0px 0px 0px 0px;
-    padding: 20px 20px 0px 20px;
-}
-
-.admin_action_legend {
-    font-weight: bold;
-    text-align: left;
-    color: crimson
-}
-
-.admin_action_message {
-    font-weight: bold;
-    text-align: left;
-    color: #7565b7
+    padding: 0px 20px 20px 20px;
 }
 
 .message {
@@ -64,4 +33,37 @@ hr {
     color: #dea093;
     margin: 0px 0px 0px 0px;
     padding: 0px 0px 0px 20px;
+}
+
+.form_message {
+    font-weight: bold;
+    text-align: left;
+    color: #dea093;
+    margin: 20px 0px 20px 0px;
+}
+
+
+.action_legend {
+    font-weight: bold;
+    text-align: left;
+    color: crimson
+}
+
+.action_message {
+    font-weight: bold;
+    text-align: left;
+    color: #7565b7
+}
+
+.link {
+    border: 1px solid #dea093; /* Рамка */
+    display: inline-block;
+    padding: 5px 15px; /* Поля */
+    /*text-decoration: none; /* Убираем подчёркивание */
+    color: #000; /* Цвет текста */
+}
+.link:hover {
+    box-shadow: 0 0 5px rgba(0,0,0,0.3); /* Тень */
+    background: linear-gradient(to bottom, #fcfff4, #e9e9ce); /* Градиент */
+    color: #a00;
 }

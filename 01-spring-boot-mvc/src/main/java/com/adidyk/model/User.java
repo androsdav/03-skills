@@ -56,6 +56,16 @@ public class User {
     }
 
     /**
+     * User - constructor.
+     * @param login - user login.
+     * @param password - user password.
+     */
+    public User(String login, String password) {
+        this.login = login;
+        this.password = password;
+    }
+
+    /**
      * getId - returns user id.
      * @return - returns user id.
      */

@@ -11,12 +11,12 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
-<div class="admin">
-    <!--------------------------- select type and save product ---------------------------->
-    <div class="admin_save">
+<div class="main">
+    <!----------------------------------------- update user --------------------------------------------->
+    <div class="frame">
         <form action="#" th:action="@{/updateUser}"  th:object="${user}" method="post">
             <fieldset>
-                <legend><h5 class="admin_action_legend">save user</h5></legend>
+                <legend><h5 class="admin_action_legend">update user</h5></legend>
                 <div class="form-inline">
                     <div class="form-group">
                         <div class="col-md-8">
@@ -35,8 +35,10 @@
                     </div>
                 </div>
             </fieldset>
-            <div class="message">
+            <!----------------------------------------- message -------------------------------------------->
+            <div class="form_message">
                 <fieldset>
+                    <legend><h5 class="action_message">[message]:</h5></legend>
                     <div class="form-inline">
                         <div class="form-group">
                             <div class="col-md-80">
@@ -48,8 +50,10 @@
                     </div>
                 </fieldset>
             </div>
+            <!---------------------------------------------------------------------------------------------->
         </form>
     </div>
+    <!------------------------------------------------------------------------------------------------------>
 </div>
 
 </body>

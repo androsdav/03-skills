@@ -11,55 +11,21 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
-
-<div class="admin">
+<div class="main">
     <!--------------------------- select type and save product ---------------------------->
-    <div class="admin_save">
-        <a th:href="@{/saveUser}">save new user</a>
-
-        <!--
-        <form action="#" th:action="@{/saveUser}"  th:object="${user}" method="post">
-            <fieldset>
-                <legend><h5 class="admin_action_legend">save user</h5></legend>
-                <div class="form-inline">
-                    <div class="form-group">
-                        <div class="col-md-8">
-                            <input id="login" class="form-control" type="text" th:field="${user.login}" placeholder = "login"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-8">
-                            <input id="password" class="form-control" type="text" th:field="${user.password}" placeholder = "password"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-8">
-                            <button class="btn btn-default">save</button>
-                        </div>
-                    </div>
-                </div>
-            </fieldset>
-            <div class="message">
-                <fieldset>
-                    <div class="form-inline">
-                        <div class="form-group">
-                            <div class="col-md-80">
-                                <span th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></span>
-                                <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
-                                <span th:if="${message}" th:text="${message}"></span>
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
+    <div class="frame">
+        <fieldset>
+            <legend><h5 class="action_legend">add new user</h5></legend>
+            <div>
+                <a class="link" th:href="@{/saveUser}">add new  user</a>
             </div>
-        </form>
-        -->
+        </fieldset>
     </div>
-    <!------------------------ delete and find all product by type ------------------------>
-    <div class="admin_delete_and_find_all_smart_phone">
+    <!------------------------ get all user / delete user by id / update user by id ----------->
+    <div class="frame">
         <form>
             <fieldset>
-                <legend><h5 class="admin_action_legend">get all user and delete user by id</h5></legend>
+                <legend><h5 class="action_legend">get all user / delete user by id / update user by id</h5></legend>
                 <div>
                     <table class="table table-striped">
                         <thead>
@@ -76,8 +42,8 @@
                             <td th:text="${user.id}"></td>
                             <td th:text="${user.login}"></td>
                             <td th:text="${user.password}"></td>
-                            <td><a th:href="@{/deleteUser/{id}(id=${user.id})}">delete</a></td>
-                            <td><a th:href="@{/updateUser/{id}(id=${user.id})}">update</a></td>
+                            <td><a class="link" th:href="@{/deleteUser/{id}(id=${user.id})}">delete</a></td>
+                            <td><a class="link" th:href="@{/updateUser/{id}(id=${user.id})}">update</a></td>
                         </tr>
                         </tbody>
                     </table>
@@ -85,7 +51,20 @@
             </fieldset>
         </form>
     </div>
+    <!----------------------------------------- message -------------------------------------------->
+    <div class="message">
+        <fieldset>
+            <legend><h5 class="action_message">[message]:</h5></legend>
+            <div class="form-inline">
+                <div class="form-group">
+                    <div class="col-md-80">
+                        <span th:if="${message}" th:text="${message}"></span>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <!---------------------------------------------------------------------------------------------->
 </div>
-
 </body>
 </html>
