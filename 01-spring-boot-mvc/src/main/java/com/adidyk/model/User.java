@@ -41,6 +41,12 @@ public class User {
     public User() {
     }
 
+    /**
+     * User - constructor.
+     * @param id - user id.
+     * @param login - user login.
+     * @param password - user password.
+     */
     public User(int id, String login, String password) {
         this.id = id;
         this.login = login;

@@ -4,9 +4,7 @@ import com.adidyk.model.User;
 import com.adidyk.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Class UserService.
@@ -59,10 +57,13 @@ public class UserService {
 
     /**
      * updateUser - update user.
-     * @param user - user.
+     * @param newUser - user.
      */
-    public void updateById(User user) {
-        this.save(user);
+    public User updateById(User newUser) {
+        User oldUser = this.findById(newUser);
+        oldUser.setLogin(newUser.getLogin());
+        oldUser.setPassword(newUser.getPassword());
+        return this.save(oldUser);
     }
 
     /**

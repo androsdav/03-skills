@@ -1,8 +1,9 @@
 package com.adidyk.controller;
 
+import com.adidyk.constant.Constant;
 import com.adidyk.model.User;
 import com.adidyk.service.UserService;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,21 +24,19 @@ public class UserController {
      */
     private UserService service;
 
-    @Value("${message.enteredLoginIsDuplicated}")
-    private String enteredLoginIsDuplicated;
-
-    @Value("${message.newUserAdded}")
-    private String newUserAdded;
-
-    @Value("${message.newUserNotAdded}")
-    private String newUserNotAdded;
+    /**
+     * @param constant - constant.
+     */
+    private Constant constant;
 
     /**
      * UserController - constructor.
      * @param service - service.
      */
-    UserController(UserService service) {
+    @Autowired
+    UserController(UserService service, Constant constant) {
         this.service = service;
+        this.constant = constant;
     }
 
     /**
@@ -48,7 +47,7 @@ public class UserController {
     public String saveUser(Model model, User user) {
         model.addAttribute("user", user);
         model.addAttribute("message");
-        return "save";
+        return constant.save;
     }
 
     /**
@@ -59,27 +58,25 @@ public class UserController {
      */
     @RequestMapping(value = "/saveUser", method = RequestMethod.POST)
     public String saveUser(@Valid User user, BindingResult result, Model model) {
-        String message = "";
-        String url;
         if (result.hasErrors()) {
-            url = "save";
+            constant.url = constant.save;
         } else {
             if (this.service.findByLogin(user) == null) {
                 if (this.service.save(user) != null) {
-                    message = newUserAdded;
-                    url = "index";
+                    constant.message = constant.newUserAdded;
+                    constant.url = constant.index;
                 } else {
-                    message = newUserNotAdded;
-                    url = "save";
+                    constant.message = constant.newUserNotAdded;
+                    constant.url = constant.save;
                 }
             } else {
-                message = enteredLoginIsDuplicated;
-                url = "save";
+                constant.message = constant.enteredLoginIsDuplicated;
+                constant.url = constant.save;
             }
         }
         model.addAttribute("users", this.service.findAll());
-        model.addAttribute("message", message);
-        return url;
+        model.addAttribute("message", constant.message);
+        return constant.url;
     }
 
     /**
@@ -91,19 +88,30 @@ public class UserController {
         User user = this.service.findById(new User(id));
         model.addAttribute("user", user);
         model.addAttribute("message");
-        return "update";
+        return constant.update;
     }
 
     /**
      * addUser - adds user.
      * @return - returns page.
      */
-    @RequestMapping(value = "/updateUser", method = RequestMethod.POST)
-    public String updateUser(@Valid User user, Model model) {
-
-        this.service.updateById(user);
+    @RequestMapping(value = "/updateUser/{id}", method = RequestMethod.POST)
+    public String updateUser(@PathVariable int id, @Valid User user, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            constant.url = constant.update;
+        } else {
+            if (this.service.findById(user) != null) {
+                this.service.updateById(user);
+                constant.message = constant.userUpdate;
+                constant.url = constant.index;
+            } else {
+                constant.message = constant.userNotUpdate;
+                constant.url = constant.update;
+            }
+        }
         model.addAttribute("users", this.service.findAll());
-        return "index";
+        model.addAttribute("message", constant.message);
+        return constant.url;
     }
 
     /**
@@ -116,10 +124,9 @@ public class UserController {
     public String deleteUserById(@PathVariable("id") int id, Model model, User user) {
         this.service.deleteById(new User(id));
         model.addAttribute("users", this.service.findAll());
-        model.addAttribute("user", new User());
-        return "index";
+        model.addAttribute("message", constant.userDelete);
+        return constant.index;
     }
-
 
     /**
      * findAllUser - finds all users.
@@ -128,9 +135,8 @@ public class UserController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String findAllUser(Model model) {
         model.addAttribute("users", this.service.findAll());
-        model.addAttribute("user", new User(12, "test", "test"));
-        model.addAttribute("message");
-        return "index";
+        model.addAttribute("message", constant.getAllUser);
+        return constant.index;
     }
 
 }
