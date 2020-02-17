@@ -9,5 +9,10 @@
       "name": "newUserNotAdded",
       "type": "java.lang.String",
       "description": "Description for newUserNotAdded."
+    },
+    {
+      "name": "message.enteredLoginIsDuplicated",
+      "type": "java.lang.String",
+      "description": "Description for message.enteredLoginIsDuplicated."
     }
   ] }

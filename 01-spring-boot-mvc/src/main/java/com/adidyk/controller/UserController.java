@@ -60,6 +60,7 @@ public class UserController {
     public String saveUser(@Valid User user, BindingResult result, Model model) {
         if (result.hasErrors()) {
             constant.url = constant.save;
+            constant.message = "";
         } else {
             if (this.service.findByLogin(user) == null) {
                 if (this.service.save(user) != null) {
@@ -99,6 +100,7 @@ public class UserController {
     public String updateUser(@PathVariable int id, @Valid User user, BindingResult result, Model model) {
         if (result.hasErrors()) {
             constant.url = constant.update;
+            constant.message = "";
         } else {
             if (this.service.findById(user) != null) {
                 this.service.updateById(user);
@@ -121,7 +123,7 @@ public class UserController {
      * @return - return index.
      */
     @RequestMapping(value = "/deleteUser/{id}", method = RequestMethod.GET)
-    public String deleteUserById(@PathVariable("id") int id, Model model, User user) {
+    public String deleteUserById(@PathVariable("id") int id, Model model) {
         this.service.deleteById(new User(id));
         model.addAttribute("users", this.service.findAll());
         model.addAttribute("message", constant.userDelete);
