@@ -1,11 +1,9 @@
-
 <!DOCTYPE html>
 <html xmlns = "http://www.w3.org/1999/xhtml"
       xmlns:th = "http://www.thymeleaf.org" lang="ENG">
 <head>
     <meta charset="UTF-8">
     <title>Spring Boot Security</title>
-    <title>Spring Boot MVC</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
     <link rel='stylesheet' href='https://gitcdn.xyz/cdn/angular/bower-material/v1.1.20/angular-material.css'>
     <link rel='stylesheet' href='https://material.angularjs.org/1.1.20/docs.css'>
@@ -14,16 +12,43 @@
 </head>
 <body>
 <div class="main">
-    <!---------------------- welcome, click to see a greeting ---------------------->
+    <!----------------------------------------- hello user --------------------------------------------->
     <div class="frame">
         <fieldset>
-            <legend><h5 class="action_legend">Hello World !</h5></legend>
+            <legend><h5 class="action_legend">hello user</h5></legend>
             <div>
-                Hello World !
+                <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
             </div>
         </fieldset>
     </div>
-    <!------------------------------------------------------------------------------>
+    <!---------------------------------------------------------------------------------------------->
+    <div class="frame">
+        <form action="#" th:action="@{/logout}" method="post">
+            <fieldset>
+                <legend><h5 class="action_legend">update user</h5></legend>
+                <div class="form-inline">
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-8">
+                            <button class="btn btn-default">sign out</button>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+         <!---------------------------------------------------------------------------------------------->
+        </form>
+    </div>
+    <!------------------------------------------------------------------------------------------------------>
 </div>
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>

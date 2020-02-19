@@ -1,21 +1,82 @@
-<html>
-<head></head>
+<!DOCTYPE html>
+<html xmlns = "http://www.w3.org/1999/xhtml"
+      xmlns:th = "http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring Boot Security</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+    <link rel='stylesheet' href='https://gitcdn.xyz/cdn/angular/bower-material/v1.1.20/angular-material.css'>
+    <link rel='stylesheet' href='https://material.angularjs.org/1.1.20/docs.css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
 <body>
-<h1>Login</h1>
-<form name='f' action="login" method='POST'>
-    <table>
-        <tr>
-            <td>User:</td>
-            <td><input type='text' name='username' value=''></td>
-        </tr>
-        <tr>
-            <td>Password:</td>
-            <td><input type='password' name='password' /></td>
-        </tr>
-        <tr>
-            <td><input name="submit" type="submit" value="submit" /></td>
-        </tr>
-    </table>
+<div th:if = "${param.error}">
+    Invalid username and password.
+</div>
+<div th:if = "${param.logout}">
+    You have been logged out.
+</div>
+
+<form th:action = "@{/login}" method = "post">
+    <div>
+        <label> User Name : <input type = "text" name = "username"/> </label>
+    </div>
+    <div>
+        <label> Password: <input type = "password" name = "password"/> </label>
+    </div>
+    <div>
+        <input type = "submit" value = "Sign In"/>
+    </div>
 </form>
+
+<div class="main">
+    <!----------------------------------------- update user --------------------------------------------->
+    <div class="frame">
+        <form action="#" th:action="@{/login}" method="post">
+            <fieldset>
+                <legend><h5 class="action_legend">login user</h5></legend>
+                <div class="form-inline">
+                    <div class="form-group">
+                        <div class="col-md-8">
+                            <input id="login" class="form-control" type="text" name="username" placeholder = "username"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-8">
+                            <input id="password" class="form-control" type="password" name="password" placeholder = "password"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-8">
+                            <button class="btn btn-default">login</button>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <!----------------------------------------- message -------------------------------------------->
+            <div class="form_message">
+                <fieldset>
+                    <legend><h5 class="action_message">[message]:</h5></legend>
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <div class="col-md-80">
+                                <span th:if="${param.error}" th:errors="*{param.error}"></span>
+                                <span th:if="${param.logout}" th:errors="*{param.logout}"></span>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <!---------------------------------------------------------------------------------------------->
+        </form>
+    </div>
+    <!------------------------------------------------------------------------------------------------------>
+</div>
+
+
+
+
+
 </body>
 </html>
