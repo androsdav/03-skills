@@ -10,10 +10,20 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+ /** Class WebSecurityConfig used for adds users (role user or admin) and configures http security.
+  *  @author Didyk Andrey (androsdav@gmail.com).
+  *  @since 20.02.2020.
+  *  @version 1.0.
+  */
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+     /**
+      * configure - configures http security/
+      * @param http - link variable to object of class HttpSecurity.
+      * @throws Exception - exception.
+      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -30,34 +40,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .permitAll();
     }
 
+     /**
+      * configureGlobal - used for added users and sets role for users.
+      * @param auth - link variable to object of class AuthenticationManagerBuilder.
+      * @throws Exception - exception.
+      */
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .inMemoryAuthentication()
+        auth.inMemoryAuthentication()
                 .withUser("user").password(passwordEncoder().encode("123")).roles("USER");
     }
 
+     /**
+      * passwordEncoder - password encoder.
+      * @return - new object of class BCryptPasswordEncoder.
+      */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-    /*
-    @Override
-    protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("user1").password(passwordEncoder().encode("user1Pass")).roles("USER")
-                .and()
-                .withUser("user2").password(passwordEncoder().encode("user2Pass")).roles("USER")
-                .and()
-                .withUser("admin").password(passwordEncoder().encode("adminPass")).roles("ADMIN");
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-    */
-
 
 }

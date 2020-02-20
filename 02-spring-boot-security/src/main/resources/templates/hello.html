@@ -11,44 +11,33 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
+
 <div class="main">
     <!----------------------------------------- hello user --------------------------------------------->
     <div class="frame">
         <fieldset>
-            <legend><h5 class="action_legend">hello user</h5></legend>
+            <legend><h5 class="action_legend">Welcome ! It`s Private Page</h5></legend>
             <div>
                 <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
             </div>
         </fieldset>
+
     </div>
     <!---------------------------------------------------------------------------------------------->
     <div class="frame">
         <form action="#" th:action="@{/logout}" method="post">
-            <fieldset>
-                <legend><h5 class="action_legend">update user</h5></legend>
-                <div class="form-inline">
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-8">
-                            <button class="btn btn-default">sign out</button>
-                        </div>
+            <div class="form-inline">
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-8">
+                        <button class="btn btn-default">sign out</button>
                     </div>
                 </div>
-            </fieldset>
+            </div>
          <!---------------------------------------------------------------------------------------------->
         </form>
     </div>
     <!------------------------------------------------------------------------------------------------------>
 </div>
-
-
-
-
-
-
-
-
-
-
 
 </body>
 </html>
