@@ -1,8 +1,13 @@
 package com.adidyk.model;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import java.util.Collection;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Class User used for creates new object user with params: id, login, password.
@@ -12,13 +17,13 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements UserDetails {
 
     /**
      * @param id - user id.
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     /**
@@ -26,6 +31,7 @@ public class User {
      */
     @Column(name = "login")
     @NotBlank(message = "login is mandatory")
+    @Size(min = 3, message = "at least 3 characters")
     private String login;
 
     /**
@@ -33,7 +39,24 @@ public class User {
      */
     @Column(name = "password")
     @NotBlank(message = "password is mandatory")
+    @Size(min = 3, message = "at least 3 characters")
     private String password;
+
+    /**
+     * @param passwordConfirm - password confirm.
+     */
+    @Transient
+    private String passwordConfirm;
+
+    /**
+     * @param roles - sets roles.
+     */
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name="user_role",
+            joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
+            inverseJoinColumns={@JoinColumn(name="role_id", referencedColumnName="id")})
+    private Set<Role> roles;
 
     /**
      * User - constructor.
@@ -107,8 +130,9 @@ public class User {
      * getPassword - returns user password.
      * @return - returns user password.
      */
+    @Override
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     /**
@@ -117,6 +141,68 @@ public class User {
      */
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    /**
+     * getPasswordConfirm - gets password confirm.
+     * @return - returns password confirm.
+     */
+    public String getPasswordConfirm() {
+        return this.passwordConfirm;
+    }
+
+    /**
+     *  setPasswordConfirm - sets apssword confirm.
+     * @param passwordConfirm - user password confirm.
+     */
+    public void setPasswordConfirm(String passwordConfirm) {
+        this.passwordConfirm = passwordConfirm;
+    }
+
+    /**
+     * getRoles - gets set roles.
+     * @return - returns set roles.
+     */
+    public Set<Role> getRoles() {
+        return this.roles;
+    }
+
+    /**
+     * setRole - sets role.
+     * @param roles - roles.
+     */
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return this.getRoles();
+    }
+
+    @Override
+    public String getUsername() {
+        return this.getLogin();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
     /**
@@ -131,7 +217,9 @@ public class User {
         User user = (User) o;
         return id == user.id &&
                 Objects.equals(login, user.login) &&
-                Objects.equals(password, user.password);
+                Objects.equals(password, user.password) &&
+                Objects.equals(passwordConfirm, user.passwordConfirm) &&
+                Objects.equals(roles, user.roles);
     }
 
     /**
@@ -153,6 +241,7 @@ public class User {
                 "id=" + id +
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
+                ", roles='" + roles + '\'' +
                 '}';
     }
 
