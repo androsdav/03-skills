@@ -78,17 +78,27 @@ public class UserService implements UserDetailsService {
      * @param user - user.
      * @return - returns user.
      */
+    /*
     public User findUserByLogin(User user) {
         return this.userRepository.findByLogin(user.getLogin());
     }
+    */
 
     /**
      * findById - find user by id.
      * @param user - user.
      * @return - returns user.
      */
-    public User findById(User user) {
-        return this.repository.findById(user.getId()).orElse(null);
+    public User findUserById(User user) {
+        return this.userRepository.findById(user.getId()).orElse(null);
+    }
+
+    /**
+     * deleteById - delete by id.
+     * @param user - user.
+     */
+    public void deleteById(User user) {
+        this.userRepository.deleteById(user.getId());
     }
 
     /**
