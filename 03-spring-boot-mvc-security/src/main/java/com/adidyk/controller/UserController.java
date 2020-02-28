@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 /**
- * Class UserController.афсл fdafsdf
+ * Class UserController.
  * @author Didyk Andrey (androsdav@gmail.com).
  * @since 03.02.2020.
  * @version 1.0.
