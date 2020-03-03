@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -59,7 +60,7 @@ public class UserService implements UserDetailsService {
     }
 
     /**
-     * save - adds user.
+     * saveUser - adds user.
      * @param user - user.
      */
     public boolean saveUser(User user) {
@@ -67,25 +68,17 @@ public class UserService implements UserDetailsService {
         if (userDB != null) {
             return false;
         }
-        user.setRoles(Collections.singleton(this.roleRepository.findByName("ROLE_USER")));
+        List<Role> roles = new ArrayList<>();
+        roles.add(this.roleRepository.findByName("ROLE_USER"));
+        user.setRoles(roles);
+        //user.setRoles(Collections.singleton(this.roleRepository.findByName("ROLE_USER")));
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         this.userRepository.save(user);
         return true;
     }
 
     /**
-     * findByLogin - finds user by login and returns.
-     * @param user - user.
-     * @return - returns user.
-     */
-    /*
-    public User findUserByLogin(User user) {
-        return this.userRepository.findByLogin(user.getLogin());
-    }
-    */
-
-    /**
-     * findById - find user by id.
+     * findUserById - find user by id.
      * @param user - user.
      * @return - returns user.
      */
@@ -94,42 +87,23 @@ public class UserService implements UserDetailsService {
     }
 
     /**
-     * deleteById - delete by id.
+     * deleteUserById - delete by id.
      * @param user - user.
      */
-    public void deleteById(User user) {
-        this.userRepository.deleteById(user.getId());
+    public boolean deleteUserById(User user) {
+        if (this.userRepository.findById(user.getId()).isPresent()) {
+            this.userRepository.deleteById(user.getId());
+            return true;
+        }
+        return false;
     }
 
     /**
-     * updateUser - update user.
-     * @param newUser - user.
-     */
-    /*
-    public User updateById(User newUser) {
-        User oldUser = this.findById(newUser);
-        oldUser.setLogin(newUser.getLogin());
-        oldUser.setPassword(newUser.getPassword());
-        return this.save(oldUser);
-    }
-
-    /**
-     * deleteById - delete by id.
-     * @param user - user.
-     */
-    /*
-    public void deleteById(User user) {
-        this.repository.deleteById(user.getId());
-    }
-
-    /**
-     * findAll - returns all users.
+     * findAllUser - returns all users.
      * @return - returns all users.
      */
-    /*
-    public List<User> findAll() {
-        return this.repository.findAll();
+    public List<User> findAllUser() {
+        return this.userRepository.findAll();
     }
-    */
 
 }

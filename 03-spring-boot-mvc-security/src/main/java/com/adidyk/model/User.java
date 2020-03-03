@@ -5,9 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.Collection;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Class User used for creates new object user with params: id, login, password.
@@ -51,12 +49,12 @@ public class User implements UserDetails {
     /**
      * @param roles - sets roles.
      */
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name="user_role",
             joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
             inverseJoinColumns={@JoinColumn(name="role_id", referencedColumnName="id")})
-    private Set<Role> roles;
+    private List<Role> roles = new ArrayList<>();
 
     /**
      * User - constructor.
@@ -163,7 +161,7 @@ public class User implements UserDetails {
      * getRoles - gets set roles.
      * @return - returns set roles.
      */
-    public Set<Role> getRoles() {
+    public List<Role> getRoles() {
         return this.roles;
     }
 
@@ -171,7 +169,7 @@ public class User implements UserDetails {
      * setRole - sets role.
      * @param roles - roles.
      */
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 
