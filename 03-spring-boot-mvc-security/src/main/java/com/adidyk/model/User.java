@@ -29,7 +29,7 @@ public class User implements UserDetails {
      */
     @Column(name = "login")
     @NotBlank(message = "login is mandatory")
-    @Size(min = 3, message = "at least 3 characters")
+    @Size(min = 3, message = "login must contain at least 3 characters")
     private String login;
 
     /**
@@ -37,13 +37,14 @@ public class User implements UserDetails {
      */
     @Column(name = "password")
     @NotBlank(message = "password is mandatory")
-    @Size(min = 3, message = "at least 3 characters")
+    @Size(min = 3, message = "password must contain at least 3 characters")
     private String password;
 
     /**
      * @param passwordConfirm - password confirm.
      */
     @Transient
+    @NotBlank(message = "passwordConfirm is mandatory")
     private String passwordConfirm;
 
     /**

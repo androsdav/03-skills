@@ -1,6 +1,7 @@
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" lang="ENG">
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="ENG">
 <head>
     <meta charset="UTF-8">
     <title>Spring Boot MVC</title>
@@ -12,45 +13,63 @@
 </head>
 <body>
 <div class="main">
-    <!--------------------------- select type and save product ---------------------------->
+
+<div>
+    <div sec:authorize = "isAuthenticated()">
+        <h4><a href="/logout">Выйти</a></h4>
+    </div>
+</div>
+
+
+
+    <!--------------------------------- login user ---------------------------->
     <div class="frame">
         <fieldset>
-            <legend><h5 class="action_legend">add new user</h5></legend>
+            <legend><h5 class="action_legend">login user</h5></legend>
             <div>
-                <a class="link" th:href="@{/saveUser}">add new  user</a>
+                <a class="link" th:href="@{/login}">login</a>
             </div>
         </fieldset>
     </div>
-    <!------------------------ get all user / delete user by id / update user by id ----------->
+    <!--------------------------- registration new user --------------------------->
     <div class="frame">
-        <form>
-            <fieldset>
-                <legend><h5 class="action_legend">get all user / delete user by id / update user by id</h5></legend>
-                <div>
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>id</th>
-                            <th>login</th>
-                            <th>password</th>
-                            <th>delete</th>
-                            <th>update</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="user : ${users}">
-                            <td th:text="${user.id}"></td>
-                            <td th:text="${user.login}"></td>
-                            <td th:text="${user.password}"></td>
-                            <td><a class="link" th:href="@{/deleteUser/{id}(id=${user.id})}">delete</a></td>
-                            <td><a class="link" th:href="@{/updateUser/{id}(id=${user.id})}">update</a></td>
-                        </tr>
-                        </tbody>
-                    </table>
+        <fieldset>
+            <legend><h5 class="action_legend">registration new user</h5></legend>
+            <div>
+                <a class="link" th:href="@{/registration}">registration new user</a>
+            </div>
+        </fieldset>
+    </div>
+
+
+
+    <!----------------------------------------- hello user --------------------------------------------->
+    <div class="frame">
+        <fieldset>
+            <legend><h5 class="action_legend">Welcome ! It`s Private Page</h5></legend>
+            <div>
+                <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+            </div>
+        </fieldset>
+
+    </div>
+    <!---------------------------------------------------------------------------------------------->
+    <div class="frame">
+        <form action="#" th:action="@{/logout}" method="post">
+            <div class="form-inline">
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-8">
+                        <button class="btn btn-default">sign out</button>
+                    </div>
                 </div>
-            </fieldset>
+            </div>
+            <!---------------------------------------------------------------------------------------------->
         </form>
     </div>
+
+
+
+
     <!----------------------------------------- message -------------------------------------------->
     <div class="message">
         <fieldset>
