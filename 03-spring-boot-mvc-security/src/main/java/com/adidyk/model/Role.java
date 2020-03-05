@@ -19,7 +19,7 @@ public class Role implements GrantedAuthority {
     /**
      * @param name - role name.
      */
-    @Column(name = "name")
+    @Column(name = "name", unique = true)
     private String name;
 
     @ManyToMany(mappedBy = "roles")

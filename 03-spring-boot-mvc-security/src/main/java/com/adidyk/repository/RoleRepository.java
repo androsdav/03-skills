@@ -1,7 +1,6 @@
 package com.adidyk.repository;
 
 import com.adidyk.model.Role;
-import com.adidyk.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

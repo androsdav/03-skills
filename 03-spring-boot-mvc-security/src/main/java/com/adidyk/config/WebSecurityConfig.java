@@ -42,9 +42,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                     // access is allowed to all users
-                    .antMatchers("/", "/index", "/home", "/css/**", "/js/**", "/images/**", "/h2-console/**").permitAll()
+                    .antMatchers("/", "/index", "/home", "/css/**", "/js/**", "/images/**", "/public/**").permitAll()
                     // access is allowed only not registration users
-                    .antMatchers("/registration",  "/h2-console/**").not().fullyAuthenticated()
+                    .antMatchers("/registration").not().fullyAuthenticated()
                     // access is allowed only admin
                     .antMatchers("/admin").hasRole("ADMIN")
                     // access is allowed only user
@@ -59,7 +59,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .and()
                 .logout()
                     .permitAll()
-                    .logoutSuccessUrl("/login");
+                    .logoutSuccessUrl("/");
     }
 
      /**

@@ -1,10 +1,10 @@
-
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="ENG">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml" lang="ENG">
 <head>
     <meta charset="UTF-8">
-    <title>Spring Boot MVC</title>
+    <title>Spring Boot MVC SECURITY</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
     <link rel='stylesheet' href='https://gitcdn.xyz/cdn/angular/bower-material/v1.1.20/angular-material.css'>
     <link rel='stylesheet' href='https://material.angularjs.org/1.1.20/docs.css'>
@@ -12,18 +12,20 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
+
 <div class="main">
 
-<div>
-    <div sec:authorize = "isAuthenticated()">
-        <h4><a href="/logout">Выйти</a></h4>
+    <!--------------------------------- logout user ---------------------------->
+    <div class="frame" sec:authorize="isAuthenticated()">
+        <fieldset>
+            <legend><h5 class="action_legend">logout user [[${#httpServletRequest.remoteUser}]]!</h5></legend>
+            <div>
+                <a class="link" th:href="@{/logout}">logout</a>
+            </div>
+        </fieldset>
     </div>
-</div>
-
-
-
     <!--------------------------------- login user ---------------------------->
-    <div class="frame">
+    <div class="frame" sec:authorize="!isAuthenticated()">
         <fieldset>
             <legend><h5 class="action_legend">login user</h5></legend>
             <div>
@@ -32,7 +34,7 @@
         </fieldset>
     </div>
     <!--------------------------- registration new user --------------------------->
-    <div class="frame">
+    <div class="frame" sec:authorize="!isAuthenticated()">
         <fieldset>
             <legend><h5 class="action_legend">registration new user</h5></legend>
             <div>
@@ -40,10 +42,39 @@
             </div>
         </fieldset>
     </div>
+    <!--------------------------- only user page --------------------------->
+    <div class="frame" sec:authorize="hasRole('ROLE_USER')">
+        <fieldset>
+            <legend><h5 class="action_legend">only user page</h5></legend>
+            <div>
+                <a class="link" th:href="@{/user}">only user page</a>
+            </div>
+        </fieldset>
+    </div>
+    <!--------------------------- only admin page --------------------------->
+    <div class="frame" sec:authorize="hasRole('ROLE_ADMIN')">
+        <fieldset>
+            <legend><h5 class="action_legend">only admin page</h5></legend>
+            <div>
+                <a class="link" th:href="@{/admin}">only admin page</a>
+            </div>
+        </fieldset>
+    </div>
+    <!--------------------------- public page (all users) --------------------------->
+    <div class="frame">
+        <fieldset>
+            <legend><h5 class="action_legend">public page</h5></legend>
+            <div>
+                <a class="link" th:href="@{/public}">all user</a>
+            </div>
+        </fieldset>
+    </div>
+    <!--------------------------------- login user ---------------------------->
 
 
 
     <!----------------------------------------- hello user --------------------------------------------->
+    <!--
     <div class="frame">
         <fieldset>
             <legend><h5 class="action_legend">Welcome ! It`s Private Page</h5></legend>
@@ -52,8 +83,9 @@
             </div>
         </fieldset>
 
-    </div>
+    </div>-->
     <!---------------------------------------------------------------------------------------------->
+    <!--
     <div class="frame">
         <form action="#" th:action="@{/logout}" method="post">
             <div class="form-inline">
@@ -62,10 +94,12 @@
                         <button class="btn btn-default">sign out</button>
                     </div>
                 </div>
-            </div>
+            </div>-->
             <!---------------------------------------------------------------------------------------------->
+    <!--
         </form>
     </div>
+    -->
 
 
 
@@ -85,5 +119,6 @@
     </div>
     <!---------------------------------------------------------------------------------------------->
 </div>
+
 </body>
 </html>

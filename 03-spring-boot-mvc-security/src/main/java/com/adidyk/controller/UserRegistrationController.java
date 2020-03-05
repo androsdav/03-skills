@@ -19,19 +19,36 @@ public class UserRegistrationController {
      */
     private UserService userService;
 
+    /**
+     * UserService - constructor.
+     * @param userService - user service.
+     */
     @Autowired
     private UserRegistrationController(UserService userService) {
         this.userService = userService;
     }
 
+    /**
+     * registration - registration.
+     * @param model - model.
+     * @param user - user.
+     * @return - return page registration.
+     */
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    private String registration(Model model, User user) {
+    public String registration(Model model, User user) {
         model.addAttribute("user", user);
         return "registration";
     }
 
+    /**
+     * registration - registration.
+     * @param user - user.
+     * @param result - result.
+     * @param model - model.
+     * @return - returns index page.
+     */
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    private String registration(@ModelAttribute("user") @Valid User user, BindingResult result, Model model) {
+    public String registration(@ModelAttribute("user") @Valid User user, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "registration";
         }
@@ -46,6 +63,5 @@ public class UserRegistrationController {
         model.addAttribute("userSave", "new user was added");
         return "redirect:/";
     }
-
 
 }

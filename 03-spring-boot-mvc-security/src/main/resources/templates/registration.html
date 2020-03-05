@@ -47,7 +47,7 @@
                     <legend><h5 class="action_message">[message]:</h5></legend>
                     <div class="form-inline">
                         <div class="form-group">
-                            <br class="col-md-80">
+                            <div class="col-md-80">
                                 <span th:if="${#fields.hasErrors('login')}" th:errors="${user.login}"><br></span>
                                 <span th:if="${#fields.hasErrors('password')}" th:errors="${user.password}"><br></span>
                                 <span th:if="${#fields.hasErrors('passwordConfirm')}" th:errors="${user.passwordConfirm}"><br></span>
