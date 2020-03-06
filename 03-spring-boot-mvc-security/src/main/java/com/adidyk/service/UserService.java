@@ -76,15 +76,6 @@ public class UserService implements UserDetailsService {
     }
 
     /**
-     * findUserById - find user by id.
-     * @param user - user.
-     * @return - returns user.
-     */
-    public User findUserById(User user) {
-        return this.userRepository.findById(user.getId()).orElse(null);
-    }
-
-    /**
      * deleteUserById - delete by id.
      * @param user - user.
      */

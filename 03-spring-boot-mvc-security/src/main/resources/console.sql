@@ -9,7 +9,7 @@ INSERT INTO users(login,  password) values('admin', 'admin');
 INSERT INTO user_role(user_id, role_id) values(1, 2);
 
 -- delete from table
-DELETE FROM users;
+DELETE FROM users WHERE id = 3;
 DELETE FROM roles;
 
 -- select all from table
