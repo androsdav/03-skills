@@ -10,11 +10,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
- /** Class WebSecurityConfig used for adds users (role user or admin) and configures http security.
-  *  @author Didyk Andrey (androsdav@gmail.com).
-  *  @since 20.02.2020.
-  *  @version 1.0.
-  */
+/** Class WebSecurityConfig used for adds users (role user or admin) and configures http security.
+ *  @author Didyk Andrey (androsdav@gmail.com).
+ *  @since 20.02.2020.
+ *  @version 1.0.
+ */
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
