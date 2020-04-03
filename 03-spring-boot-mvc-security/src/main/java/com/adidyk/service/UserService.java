@@ -34,16 +34,17 @@ public class UserService implements UserDetailsService {
 
     /**
      * UserService - constructor.
-     * @param repository - repository.
+     * @param userRepository - user repository.
+     * @param roleRepository - role repository.
      */
     @Autowired
-    UserService(UserRepository repository, RoleRepository roleRepository) {
-        this.userRepository = repository;
+    UserService(UserRepository userRepository, RoleRepository roleRepository) {
+        this.userRepository = userRepository;
         this.roleRepository = roleRepository;
     }
 
     /**
-     * loadUserByUsername - loads user by user name.
+     * loadUserByUserName - loads user by user name (login user).
      * @param login - user login.
      * @return - returns user details
      * @throws UsernameNotFoundException - user not found exception.
@@ -58,7 +59,7 @@ public class UserService implements UserDetailsService {
     }
 
     /**
-     * saveUser - adds user.
+     * saveUser - adds user with role "ROLE_USER".
      * @param user - user.
      */
     public boolean saveUser(User user) {
@@ -66,10 +67,9 @@ public class UserService implements UserDetailsService {
         if (userDB != null) {
             return false;
         }
-        List<Role> roles = new ArrayList<>();
+        List<Role> roles = new ArrayList<>() ;
         roles.add(this.roleRepository.findByName("ROLE_USER"));
         user.setRoles(roles);
-        //user.setRoles(Collections.singleton(this.roleRepository.findByName("ROLE_USER")));
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         this.userRepository.save(user);
         return true;

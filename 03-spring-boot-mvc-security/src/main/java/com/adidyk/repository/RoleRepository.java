@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- * Interface UserRepository used for access to data base.
+ * Interface RoleRepository used for access to data base.
  * @author Didyk Andrey (androsdav@gmail.com).
  * @since 03.02.2020.
  * @version 1.0.
@@ -14,9 +14,10 @@ import org.springframework.stereotype.Repository;
 public interface  RoleRepository extends JpaRepository<Role, Integer> {
 
     /**
-     * findByLogin - find user by login.
-     * @param name - user login.
+     * findByLogin - find role by name.
+     * @param name - role name.
      * @return - return true or false.
      */
     Role findByName(String name);
+
 }

@@ -174,31 +174,55 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
+    /**
+     * getAuthorities - returns all roles.
+     * @return  - returns all roles.
+     */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.getRoles();
     }
 
+    /**
+     * getUserName - returns username (login user).
+     * @return - returns username (login user).
+     */
     @Override
     public String getUsername() {
         return this.getLogin();
     }
 
+    /**
+     * isAccountNonExpired - is account non expired.
+     * @return - returns true.
+     */
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
+    /**
+     * isAccountNonLocked - is account non locked.
+     * @return - returns true.
+     */
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
 
+    /**
+     * isCredentialsNonExpired - is credential non expired.
+     * @return - returns true.
+     */
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
+    /**
+     * isEnabled - is enabled.
+     * @return - true.
+     */
     @Override
     public boolean isEnabled() {
         return true;
@@ -207,7 +231,7 @@ public class User implements UserDetails {
     /**
      * equals - returns boolean result.
      * @param o - object of class Object.
-     * @return - returns "true" if id, login, password, of user is same, and returns "false" - isn`t same.
+     * @return - returns "true" if id, login, password, list role of user is same, and returns "false" - isn`t same.
      */
     @Override
     public boolean equals(Object o) {

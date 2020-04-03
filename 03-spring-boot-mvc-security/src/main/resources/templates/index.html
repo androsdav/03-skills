@@ -45,9 +45,9 @@
     <!--------------------------- only user page --------------------------->
     <div class="frame" sec:authorize="hasRole('ROLE_USER')">
         <fieldset>
-            <legend><h5 class="action_legend">only user page</h5></legend>
+             <legend><h5 class="action_legend">only user page</h5></legend>
             <div>
-                <a class="link" th:href="@{/user}">only user page</a>
+                <a class="link" th:href="@{/user}">user page </a>
             </div>
         </fieldset>
     </div>
@@ -56,23 +56,23 @@
         <fieldset>
             <legend><h5 class="action_legend">only admin page</h5></legend>
             <div>
-                <a class="link" th:href="@{/admin}">only admin page</a>
+                <a class="link" th:href="@{/admin}">link visibly only admin</a>
             </div>
         </fieldset>
+    </div>
+    <!-------------------------- only user and admin page --------------------------->
+    <div class="frame" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+        visibly only admin and registration user
     </div>
     <!--------------------------- public page (all users) --------------------------->
     <div class="frame">
         <fieldset>
             <legend><h5 class="action_legend">public page</h5></legend>
             <div>
-                <a class="link" th:href="@{/public}">all user</a>
+                <a class="link" th:href="@{/public}">visible all user</a>
             </div>
         </fieldset>
     </div>
-    <!--------------------------------- login user ---------------------------->
-
-
-
     <!----------------------------------------- hello user --------------------------------------------->
     <!--
     <div class="frame">

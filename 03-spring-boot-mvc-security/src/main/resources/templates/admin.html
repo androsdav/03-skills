@@ -24,6 +24,7 @@
                             <th>id</th>
                             <th>login</th>
                             <th>password</th>
+                            <th>role</th>
                             <th>delete</th>
                         </tr>
                         </thead>
@@ -32,6 +33,11 @@
                             <td th:text="${user.id}"></td>
                             <td th:text="${user.login}"></td>
                             <td th:text="${user.password}"></td>
+                            <td>
+                                <th:block th:each="role : ${user.roles}">
+                                    <th:block th:text="${role.name}"></th:block>
+                                </th:block>
+                            </td>
                             <td><a class="link" th:href="@{/deleteUser/{id}(id=${user.id})}">delete</a></td>
                         </tr>
                         </tbody>

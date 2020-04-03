@@ -4,12 +4,17 @@ INSERT INTO roles(name) values('ROLE_ADMIN');
 
 -- insert admin with login = admin and password = admin
 INSERT INTO users(login,  password) values('admin', 'admin');
+INSERT INTO users(login,  password) values('userAdmin', 'userAdmin');
 
--- insert admin with login = admin and password = admin
+-- insert role admin for user admin
 INSERT INTO user_role(user_id, role_id) values(1, 2);
 
+-- insert role user and admin for user userAdmin
+INSERT INTO user_role(user_id, role_id) values(2, 1);
+INSERT INTO user_role(user_id, role_id) values(2, 2);
+
 -- delete from table
-DELETE FROM users WHERE id = 3;
+DELETE FROM users;
 DELETE FROM roles;
 
 -- select all from table

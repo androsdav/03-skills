@@ -9,6 +9,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+/**
+ * Class AdminController for administering users for user with administrator role.
+ * @author Didyk Andrey (androsdav@gmail.com).
+ * @since 03.02.2020.
+ * @version 1.0.
+ */
 @Controller
 public class AdminController {
 
@@ -53,7 +59,6 @@ public class AdminController {
     public String findAllUser(Model model) {
         model.addAttribute("users", this.userService.findAllUser());
         return "admin";
-
     }
 
 }

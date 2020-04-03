@@ -1,14 +1,8 @@
 package com.adidyk.controller;
 
-import com.adidyk.constant.Constant;
-import com.adidyk.model.User;
 import com.adidyk.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-import javax.validation.Valid;
 
 /**
  * Class UserController.
