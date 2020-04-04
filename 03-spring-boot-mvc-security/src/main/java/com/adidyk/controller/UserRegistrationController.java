@@ -61,7 +61,7 @@ public class UserRegistrationController {
             return "registration";
         }
         model.addAttribute("userSave", "new user was added");
-        return "redirect:/";
+        return "index";
     }
 
 }

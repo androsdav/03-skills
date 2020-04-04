@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" lang="ENG">
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="ENG">
 <head>
     <meta charset="UTF-8">
     <title>Spring Boot MVC</title>
@@ -12,11 +12,11 @@
 </head>
 <body>
 <div class="main">
-    <!------------------------ get all user / delete user by id / update user by id ----------->
+    <!------------------------ get all user / delete user by id ------------------------>
     <div class="frame">
         <form>
             <fieldset>
-                <legend><h5 class="action_legend">get all user / delete user by id </h5></legend>
+                <legend><h5 class="action_legend">Admin page </h5></legend>
                 <div>
                     <table class="table table-striped">
                         <thead>
@@ -34,9 +34,7 @@
                             <td th:text="${user.login}"></td>
                             <td th:text="${user.password}"></td>
                             <td>
-                                <th:block th:each="role : ${user.roles}">
-                                    <th:block th:text="${role.name}"></th:block>
-                                </th:block>
+                                <th:block th:each="role : ${user.roles}" th:text="|${role.name} |"/>
                             </td>
                             <td><a class="link" th:href="@{/deleteUser/{id}(id=${user.id})}">delete</a></td>
                         </tr>
@@ -44,22 +42,29 @@
                     </table>
                 </div>
             </fieldset>
-        </form>
-    </div>
-    <!----------------------------------------- message -------------------------------------------->
-    <div class="message">
-        <fieldset>
-            <legend><h5 class="action_message">[message]:</h5></legend>
-            <div class="form-inline">
-                <div class="form-group">
-                    <div class="col-md-80">
-                        <span th:if="${message}" th:text="${message}"></span>
-                    </div>
+            <div>
+                <div>
+                    <a class="link" th:href="@{/back}"> &lArr; back</a>
                 </div>
             </div>
-        </fieldset>
+            <!----------------------------------------- message -------------------------------------------->
+            <div class="form_message">
+                <fieldset>
+                    <legend><h5 class="action_message">[message]:</h5></legend>
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <div class="col-md-80">
+                                <span th:if="${userDeleteError}" th:text="${userDeleteError}"><br></span>
+                                <span th:if="${userDelete}" th:text="${userDelete}"></span>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <!---------------------------------------------------------------------------------------------->
+        </form>
     </div>
-    <!---------------------------------------------------------------------------------------------->
+
 </div>
 </body>
 </html>

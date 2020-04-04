@@ -40,14 +40,14 @@ public class AdminController {
      */
     @RequestMapping(value = "/deleteUser/{id}", method = RequestMethod.GET)
     public String deleteUserById(@PathVariable int id, Model model) {
-        if (this.userService.deleteUserById(new User(id))) {
+        if (!this.userService.deleteUserById(new User(id))) {
             model.addAttribute("userDeleteError", "user was not delete, because user by id was not found");
             model.addAttribute("users", this.userService.findAllUser());
-            return "redirect:/admin";
+            return "admin";
         }
-        model.addAttribute("userDeleteError", "user was delete");
+        model.addAttribute("userDelete", "user was delete");
         model.addAttribute("users", this.userService.findAllUser());
-        return "redirect:/admin";
+        return "admin";
     }
 
     /**
