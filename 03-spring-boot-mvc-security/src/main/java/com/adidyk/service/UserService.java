@@ -57,7 +57,7 @@ public class UserService implements UserDetailsService {
         }
         return user;
     }
-
+ 
     /**
      * saveUser - adds user with role "ROLE_USER".
      * @param user - user.
