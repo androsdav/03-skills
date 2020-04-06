@@ -18,7 +18,7 @@
             <!----------------------------------------- logout user ---------------------------------------->
             <div class="frame" sec:authorize="isAuthenticated()">
                 <fieldset>
-                    <legend><h5 class="action_legend">logout user [[${#httpServletRequest.remoteUser}]]!</h5></legend>
+                    <legend><h5 class="action_legend">Hello user: [[${#httpServletRequest.remoteUser}]]</h5></legend>
                     <div>
                         <a class="link" th:href="@{/logout}">logout</a>
                     </div>
@@ -45,7 +45,7 @@
             <!-------------------------------------- only user page ---------------------------------------->
             <div class="frame" sec:authorize="hasRole('ROLE_USER')">
                 <fieldset>
-                     <legend><h5 class="action_legend">User page</h5></legend>
+                     <legend><h5 class="action_legend">Only user page</h5></legend>
                     <div>
                         <a class="link" th:href="@{/user}">user page</a>
                     </div>
@@ -54,7 +54,7 @@
             <!------------------------------------- only admin page ---------------------------------------->
             <div class="frame" sec:authorize="hasRole('ROLE_ADMIN')">
                 <fieldset>
-                    <legend><h5 class="action_legend">Admin page</h5></legend>
+                    <legend><h5 class="action_legend">Only admin page</h5></legend>
                     <div>
                         <a class="link" th:href="@{/admin}">admin page</a>
                     </div>
@@ -63,9 +63,9 @@
             <!------------------------------ only user and admin page -------------------------------------->
             <div class="frame" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
                 <fieldset>
-                    <legend><h5 class="action_legend">Admin and user page</h5></legend>
+                    <legend><h5 class="action_legend">Only admin and user page</h5></legend>
                     <div>
-                        <a class="link" th:href="@{/admin}">admin and user page</a>
+                        <a class="link" th:href="@{/admin-user}">admin / user page</a>
                     </div>
                 </fieldset>
             </div>
@@ -74,7 +74,7 @@
                 <fieldset>
                     <legend><h5 class="action_legend">Public page</h5></legend>
                     <div>
-                        <a class="link" th:href="@{/public}">public</a>
+                        <a class="link" th:href="@{/public}">public page</a>
                     </div>
                 </fieldset>
                 <!--------------------------------------- message ------------------------------------------>
