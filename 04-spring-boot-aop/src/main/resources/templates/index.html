@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="ENG">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring Boot Security</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+    <link rel='stylesheet' href='https://gitcdn.xyz/cdn/angular/bower-material/v1.1.20/angular-material.css'>
+    <link rel='stylesheet' href='https://material.angularjs.org/1.1.20/docs.css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="main">
+    <!---------------------- welcome, click to see a greeting ---------------------->
+    <div class="frame">
+        <fieldset>
+            <legend><h5 class="action_legend">Welcome ! It`s Public Page</h5></legend>
+            <div>
+                <a class="link" th:href="@{/hello}">click to see a private page</a>
+            </div>
+        </fieldset>
+    </div>
+    <!------------------------------------------------------------------------------>
+</div>
+
+</body>
+</html>
