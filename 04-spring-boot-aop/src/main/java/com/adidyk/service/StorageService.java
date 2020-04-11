@@ -1,7 +1,6 @@
 package com.adidyk.service;
 
 import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -18,7 +17,7 @@ public class StorageService {
     /**
      * @param list - list.
      */
-    private ArrayList<Integer> list = new ArrayList<>();
+    private List<Integer> list = new ArrayList<>();
 
     /**
      * add - adds new value.
@@ -40,15 +39,15 @@ public class StorageService {
      * get - return value by index.
      * @param index - index.
      */
-    public void get(int index) {
-        this.list.get(index);
+    public Integer get(int index) {
+        return this.list.get(index);
     }
 
     /**
      * getAll - returns list.
      * @return - returns list.
      */
-    public ArrayList<Integer> getAll() {
+    public List<Integer> getAll() {
         return this.list;
     }
 
@@ -61,7 +60,7 @@ public class StorageService {
     }
 
     /**
-     * equals - eqauls.
+     * equals - equals.
      * @param o - object.
      * @return - return true or false format.
      */
