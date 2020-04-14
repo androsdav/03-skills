@@ -64,7 +64,6 @@ public class StartUi implements CommandLineRunner {
         this.storageService.equals(5);
         this.storageService.hashCode();
         this.storageService.toString();
-        */
 
         System.out.println();
         System.out.println("logAfterAllNameMethodInPackageService: ");
@@ -84,6 +83,16 @@ public class StartUi implements CommandLineRunner {
         this.calculateService.subsraction(3, 4);
         this.calculateService.multiplication(4, 6);
         this.calculateService.division(54, 42);
+        */
+
+        System.out.println();
+        System.out.println("logAfterCalculateServiceMethodAddition: ");
+        this.calculateService.addition(1, 2);
+        this.calculateService.subtraction(3, 4);
+        this.calculateService.multiplication(4, 6);
+        this.calculateService.division(54, 0);
+
+
         /*
         for (Integer item : this.storageService.getAll()) {
             System.out.println("item: " + item);

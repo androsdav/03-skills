@@ -1,8 +1,12 @@
 package com.adidyk.aop;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StopWatch;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,26 +25,60 @@ public class LoggingAspect {
      */
     private Logger logger = Logger.getLogger(LoggingAspect.class.getName());
 
-    /*
     /**
-     * logMethodCall - logs all name methods in within StorageService after doing.
+     * logAfterAllNameMethodInStorageService - logs all name methods in within StorageService after doing.
      * @param joinPoint - join point.
      */
-    /*
     @After("within(com.adidyk.service.StorageService)")
     public void logAfterAllNameMethodInStorageService(JoinPoint joinPoint) {
         logger.log(Level.INFO, "name method: " + joinPoint.getSignature().getName());
     }
-    */
 
     /**
-     * logMethodCall - logs all name methods in within StorageService after doing.
+     * logAfterAllNameMethodInPackageService - logs all name methods in within StorageService after doing.
      * @param joinPoint - join point.
      */
-    @After("within(com.adidyk..*)")
+    @After("within(com.adidyk.service.*)")
     public void logAfterAllNameMethodInPackageService(JoinPoint joinPoint) {
-        logger.log(Level.INFO, "name method: " + joinPoint.getSignature().getClass().getName());
+        logger.log(Level.INFO, "name method: " + joinPoint.getSignature().getName());
     }
+
+    /**
+     * logAfterCalculateService - logs name method addition of class CalculateService.
+     * @param joinPoint - join point.
+     */
+    @After("execution(public double com.adidyk.service.CalculateService.addition(double, double))")
+    public void logAfterCalculateServiceMethodNameAddition(JoinPoint joinPoint) {
+        logger.log(Level.INFO, "name method: " + joinPoint.getSignature().getName());
+    }
+
+    /**
+     * logAfterCalculateService - logs name method addition of class CalculateService.
+     * @param joinPoint - join point.
+     */
+    @After("execution(* com.adidyk.service.CalculateService.*(..))")
+    public void logAfterAllNameMethodCalculateService(JoinPoint joinPoint) {
+        logger.log(Level.INFO, "name method: " + joinPoint.getSignature().getName());
+    }
+
+    /**
+     * logAfterCalculateService - logs name method addition of class CalculateService.
+     * @param proceedingJoinPoint - join point.
+     */
+    @Around(value = "execution(* com.adidyk.service.CalculateService.*(..))")
+    public Object logResultForAllMethodCalculateService(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+        MethodSignature methodSignature = (MethodSignature) proceedingJoinPoint.getSignature();
+        String className = methodSignature.getDeclaringType().getSimpleName();
+        String methodName = methodSignature.getName();
+        final StopWatch stopWatch = new StopWatch();
+        //Measure method execution time
+        stopWatch.start();
+        Object timeResult = proceedingJoinPoint.proceed();
+        stopWatch.stop();
+        logger.log(Level.INFO, "[INFO]: " + className + "." + methodName + ": " + stopWatch.getTotalTimeMillis() + "ms");
+        return timeResult;
+    }
+
 
 
     /*
@@ -54,8 +92,6 @@ public class LoggingAspect {
         logger.log(Level.INFO, "name method: " + joinPoint.getSignature().getName());
     }
     */
-
-
 
     /*
     /**

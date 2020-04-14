@@ -27,7 +27,7 @@ public class CalculateService {
      * @param second - second value.
      * @return - returns result of addition.
      */
-    public double subsraction(double first, double second) {
+    public double subtraction(double first, double second) {
         return first - second;
     }
 
