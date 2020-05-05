@@ -17,7 +17,7 @@ public class CalculateService {
      * @param second - second value.
      * @return - returns result of addition.
      */
-    public double addition(double first, double second) {
+    public Double addition(double first, double second) {
         return first + second;
     }
 
@@ -27,7 +27,7 @@ public class CalculateService {
      * @param second - second value.
      * @return - returns result of addition.
      */
-    public double subtraction(double first, double second) {
+    public Double subtraction(double first, double second) {
         return first - second;
     }
 
@@ -37,7 +37,7 @@ public class CalculateService {
      * @param second - second value.
      * @return - returns result of addition.
      */
-    public double multiplication(double first, double second) {
+    public Double multiplication(double first, double second) {
         return first * second;
     }
 
@@ -47,8 +47,28 @@ public class CalculateService {
      * @param second - second value.
      * @return - returns result of addition.
      */
-    public double division(double first, double second) {
+    public Double division(Double first, Double second) {
         return  first / second;
+    }
+
+    /**
+     * concatWord - concat two words.
+     * @param first - first word.
+     * @param second - second word.
+     * @return - returns concat two word.
+     */
+    public String concatWord(String first, String second) {
+        return first + second;
+    }
+
+    /**
+     * concatFirstWithDouble - concat first with double.
+     * @param first - first param.
+     * @param second - second param.
+     * @return - returns result concat first with double.
+     */
+    public String concatStringWithDouble(String first, Double second) {
+        return first + second;
     }
 
 }
