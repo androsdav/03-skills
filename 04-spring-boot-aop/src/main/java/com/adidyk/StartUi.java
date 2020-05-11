@@ -44,20 +44,12 @@ public class StartUi implements CommandLineRunner {
     }
 
     /**
-     * run - run project.
+     * run - run project, testing - bad practice.
      * @param arg - arg.
      */
     @Override
     public void run(String ... arg) {
 
-        System.out.println();
-        this.storageService.add(10);
-        this.storageService.add(11);
-        Integer result = this.storageService.get(1);
-        System.out.println("Second element from list: " + result);
-
-
-        /*
         System.out.println();
         System.out.println("logAfterAllNameMethodInStorageService: ");
         this.storageService.add(10);
@@ -72,7 +64,6 @@ public class StartUi implements CommandLineRunner {
         this.storageService.equals(5);
         this.storageService.hashCode();
         this.storageService.toString();
-
         System.out.println();
         System.out.println("logAfterAllNameMethodInPackageService: ");
         this.storageService.add(10);
@@ -91,7 +82,6 @@ public class StartUi implements CommandLineRunner {
         this.calculateService.subtraction(3, 4);
         this.calculateService.multiplication(4, 6);
         this.calculateService.division((double)54, (double)42);
-
         System.out.println();
         System.out.println("logAfterCalculateServiceMethodAddition: ");
         this.calculateService.addition(1, 2);
@@ -100,13 +90,6 @@ public class StartUi implements CommandLineRunner {
         this.calculateService.division((double)54, (double)0);
         this.calculateService.concatWord("hello", "world");
         this.calculateService.concatStringWithDouble("hello", (double) 120);
-
-
-        /*
-        for (Integer item : this.storageService.getAll()) {
-            System.out.println("item: " + item);
-        }
-        */
     }
 
 }

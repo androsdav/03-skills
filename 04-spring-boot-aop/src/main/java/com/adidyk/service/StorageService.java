@@ -1,14 +1,12 @@
 package com.adidyk.service;
 
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 /**
- * Class FullNameComposer.
+ * Class StorageService, list integer store.
  * @author Didyk Andrey (androsdav@gmail.com).
  * @since 10.04.2020.
  * @version 1.0.
@@ -93,4 +91,5 @@ public class StorageService {
                 "list=" + list +
                 '}';
     }
+
 }

@@ -3,7 +3,7 @@ package com.adidyk.service;
 import org.springframework.stereotype.Service;
 
 /**
- * Class CalculateService..
+ * Class CalculateService.
  * @author Didyk Andrey (androsdav@gmail.com).
  * @since 10.04.2020.
  * @version 1.0.
