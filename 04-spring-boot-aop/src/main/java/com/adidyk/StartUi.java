@@ -51,6 +51,14 @@ public class StartUi implements CommandLineRunner {
     public void run(String ... arg) {
 
         System.out.println();
+        this.storageService.add(10);
+        this.storageService.add(11);
+        Integer result = this.storageService.get(1);
+        System.out.println("Second element from list: " + result);
+
+
+        /*
+        System.out.println();
         System.out.println("logAfterAllNameMethodInStorageService: ");
         this.storageService.add(10);
         this.storageService.add(11);

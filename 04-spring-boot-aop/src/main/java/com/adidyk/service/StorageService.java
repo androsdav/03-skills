@@ -1,6 +1,8 @@
 package com.adidyk.service;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -11,7 +13,7 @@ import java.util.Objects;
  * @since 10.04.2020.
  * @version 1.0.
  */
-@Component
+@Service
 public class StorageService {
 
     /**

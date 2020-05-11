@@ -4,6 +4,8 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StopWatch;
 
@@ -16,8 +18,8 @@ import java.util.logging.Logger;
  * @since 10.04.2020.
  * @version 1.0.
  */
-@Service
 @Aspect
+@Configuration
 public class LoggingAspect {
 
     /**
@@ -25,6 +27,7 @@ public class LoggingAspect {
      */
     private Logger logger = Logger.getLogger(LoggingAspect.class.getName());
 
+    /*
     /**
      * logAfterAllNameMethodInStorageService - logs all name methods in within StorageService after doing.
      * @param joinPoint - join point.
@@ -36,6 +39,7 @@ public class LoggingAspect {
     }
     */
 
+    /*
     /**
      * logAfterAllNameMethodInPackageService - logs all name methods in within StorageService after doing.
      * @param joinPoint - join point.
@@ -47,6 +51,7 @@ public class LoggingAspect {
     }
     */
 
+    /*
     /**
      * logAfterCalculateService - logs name method addition of class CalculateService.
      * @param joinPoint - join point.
@@ -58,6 +63,7 @@ public class LoggingAspect {
     }
     */
 
+    /*
     /**
      * logAfterCalculateService - logs name method addition of class CalculateService.
      * @param joinPoint - join point.
@@ -69,6 +75,7 @@ public class LoggingAspect {
     }
     */
 
+    /*
     /**
      * logAfterCalculateService - logs name method addition of class CalculateService.
      * @param joinPoint - join point.
@@ -80,6 +87,7 @@ public class LoggingAspect {
     }
     */
 
+    /*
     /**
      * logAfterCalculateService - logs name method addition of class CalculateService.
      * @param joinPoint - join point.
@@ -91,6 +99,7 @@ public class LoggingAspect {
     }
     */
 
+    /*
     /**
      * logAfterCalculateService - logs name method addition of class CalculateService.
      * @param joinPoint - join point.
@@ -102,6 +111,7 @@ public class LoggingAspect {
     }
     */
 
+    /*
     /**
      * logAfterCalculateService - logs name method addition of class CalculateService.
      * @param joinPoint - join point.
@@ -113,25 +123,31 @@ public class LoggingAspect {
     }
     */
 
-
-
-
+    /*
     /**
      * logAfterCalculateService - logs name method addition of class CalculateService.
      * @param joinPoint - join point.
      */
-
+    /*
     @After("execution(* com.adidyk.service.CalculateService.*(..))")
     public void logAfterAllNameMethodCalculateService(JoinPoint joinPoint) {
         logger.log(Level.INFO, "name method: " + joinPoint.getSignature().getName());
     }
+    */
 
-    @AfterReturning(pointcut = "execution(public Integer com.adidyk.service.StorageService.get(int)))", returning = "result")
-    public void logAfterReturning(Object result, JoinPoint joinPoint) {
-        logger.log(Level.WARNING, "returning value: " + result);
+    @AfterReturning(pointcut = "execution(* com.adidyk.service.StorageService.*(..)))", returning = "result")
+    public void logAfterReturning(JoinPoint joinPoint, Object result) {
+        logger.log(Level.WARNING, "returning value: " + result + "joinPoint" + joinPoint);
     }
 
+    /*
+    @AfterReturning(pointcut = "execution(* com.adidyk.service.StorageService.*(..)))")
+    public void logAfterReturningPoint(JoinPoint joinPoint) {
+        logger.log(Level.WARNING, "returning value: " + joinPoint);
+    }
+    */
 
+    /*
     /**
      * logAfterCalculateService - logs name method addition of class CalculateService.
      * @param proceedingJoinPoint - join point.
