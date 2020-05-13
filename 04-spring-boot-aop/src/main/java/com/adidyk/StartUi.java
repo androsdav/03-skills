@@ -90,6 +90,7 @@ public class StartUi implements CommandLineRunner {
         this.calculateService.division((double)54, (double)0);
         this.calculateService.concatWord("hello", "world");
         this.calculateService.concatStringWithDouble("hello", (double) 120);
+        this.calculateService.addition(3, 4);
     }
 
 }

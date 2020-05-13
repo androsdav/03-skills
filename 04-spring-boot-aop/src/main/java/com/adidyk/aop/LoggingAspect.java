@@ -148,4 +148,30 @@ public class LoggingAspect {
         return proceed;
     }
 
+    /**
+     * afterAdvice - after advice.
+     * @param joinPoint - join point.
+     * @param first - first.
+     * @param second - second.
+     */
+    @After(value = "execution(* com.adidyk..service.CalculateService.*(..)) && args(first, second)")
+    public void afterAdvice(JoinPoint joinPoint, double first, double second) {
+        logger.log(Level.INFO, "first: " + first + "second: " + second);
+    }
+
+    /*
+    /**
+     * afterAdvice - after advice.
+     * @param joinPoint - join point.
+     * @param first - first.
+     * @param second - second.
+     */
+    /*
+    @After(value = "execution(* com.adidyk..service.CalculateService.addition(double, double)) && args(first, second)")
+    public void afterAdvice(JoinPoint joinPoint, double first, double second) {
+        logger.log(Level.INFO, "first: " + first + "second: " + second);
+    }
+    */
+
+
 }
