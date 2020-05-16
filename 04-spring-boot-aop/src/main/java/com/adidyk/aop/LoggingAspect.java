@@ -139,12 +139,13 @@ public class LoggingAspect {
      * @return - returns object.
      * @throws Throwable - throws.
      */
-    @Around("execution(* com.adidyk.service.*.*(..))")
-    public Object logAllMethodInPackageService(ProceedingJoinPoint joinPoint) throws Throwable {
+
+    @Around(value = "execution(* com.adidyk.service.*.*(..)) && args(first, second)", argNames = "joinPoint,first,second")
+    public Object logAllMethodInPackageService(ProceedingJoinPoint joinPoint, double first, double second) throws Throwable {
         long start = System.currentTimeMillis();
         Object proceed = joinPoint.proceed();
         long executionTime = System.currentTimeMillis() - start;
-        logger.log(Level.INFO, joinPoint.getSignature() + ": " + executionTime + "[ms]");
+        logger.log(Level.INFO, "[INFO]: " + joinPoint.getSignature() + "; firstParam: " + first + "; secondParam: " + second + "; execution time: " + executionTime + "[ms]");
         return proceed;
     }
 
@@ -154,24 +155,22 @@ public class LoggingAspect {
      * @param first - first.
      * @param second - second.
      */
-    @After(value = "execution(* com.adidyk..service.CalculateService.*(..)) && args(first, second)")
+    @After(value = "execution(* com.adidyk..service.CalculateService.*(..)) && args(first, second)", argNames = "joinPoint,first,second")
     public void afterAdvice(JoinPoint joinPoint, double first, double second) {
-        logger.log(Level.INFO, "first: " + first + "second: " + second);
+        logger.log(Level.INFO, "first: " + first + ", second: " + second);
+        logger.log(Level.INFO, "method: " + joinPoint.getSignature());
     }
 
-    /*
     /**
      * afterAdvice - after advice.
      * @param joinPoint - join point.
      * @param first - first.
      * @param second - second.
      */
-    /*
-    @After(value = "execution(* com.adidyk..service.CalculateService.addition(double, double)) && args(first, second)")
-    public void afterAdvice(JoinPoint joinPoint, double first, double second) {
-        logger.log(Level.INFO, "first: " + first + "second: " + second);
+    @Before(value = "execution(* com.adidyk.service.CalculateService.*(..)) && args(first, second)", argNames = "joinPoint,first,second")
+    public void beforeAdvice(JoinPoint joinPoint, double first, double second) {
+        logger.log(Level.INFO, "first: " + first + ", second: " + second);
+        logger.log(Level.INFO, "method: " + joinPoint.getSignature());
     }
-    */
-
 
 }

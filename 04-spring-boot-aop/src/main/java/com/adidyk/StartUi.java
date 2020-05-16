@@ -27,6 +27,7 @@ public class StartUi implements CommandLineRunner {
 
     /**
      * StartUi - constructor.
+     *
      * @param storageService - composer.
      */
     @Autowired
@@ -37,19 +38,22 @@ public class StartUi implements CommandLineRunner {
 
     /**
      * main - main.
+     *
      * @param arg - arg.
      */
-    public  static void main(String[] arg) {
+    public static void main(String[] arg) {
         SpringApplication.run(StartUi.class, arg);
     }
 
     /**
      * run - run project, testing - bad practice.
+     *
      * @param arg - arg.
      */
     @Override
-    public void run(String ... arg) {
-
+    public void run(String... arg) {
+        this.calculateService.addition(30, 40);
+        this.calculateService.division((double) 40, (double) 50);
         System.out.println();
         System.out.println("logAfterAllNameMethodInStorageService: ");
         this.storageService.add(10);
@@ -81,16 +85,17 @@ public class StartUi implements CommandLineRunner {
         this.calculateService.addition(1, 2);
         this.calculateService.subtraction(3, 4);
         this.calculateService.multiplication(4, 6);
-        this.calculateService.division((double)54, (double)42);
+        this.calculateService.division((double) 54, (double) 42);
         System.out.println();
         System.out.println("logAfterCalculateServiceMethodAddition: ");
         this.calculateService.addition(1, 2);
         this.calculateService.subtraction(3, 4);
         this.calculateService.multiplication(4, 6);
-        this.calculateService.division((double)54, (double)0);
+        this.calculateService.division((double) 54, (double) 0);
         this.calculateService.concatWord("hello", "world");
         this.calculateService.concatStringWithDouble("hello", (double) 120);
         this.calculateService.addition(3, 4);
-    }
 
+    }
 }
+
