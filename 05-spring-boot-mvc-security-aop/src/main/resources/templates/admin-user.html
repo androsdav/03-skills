@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml" lang="ENG">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring Boot MVC SECURITY</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+    <link rel='stylesheet' href='https://gitcdn.xyz/cdn/angular/bower-material/v1.1.20/angular-material.css'>
+    <link rel='stylesheet' href='https://material.angularjs.org/1.1.20/docs.css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="main">
+    <!----------------------------------------- admin-user page ---------------------------------------->
+    <div class="frame" sec:authorize="isAuthenticated()">
+        <fieldset>
+            <legend><h5 class="action_legend">Admin-user page</h5></legend>
+            <div>
+                <a class="link" th:href="@{/}"> &lArr; back</a>
+            </div>
+        </fieldset>
+    </div>
+    <!-------------------------------------------------------------------------------------------------->
+</div>
+</body>
+</html>

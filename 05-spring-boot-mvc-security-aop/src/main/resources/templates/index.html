@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml" lang="ENG">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring Boot MVC SECURITY</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+    <link rel='stylesheet' href='https://gitcdn.xyz/cdn/angular/bower-material/v1.1.20/angular-material.css'>
+    <link rel='stylesheet' href='https://material.angularjs.org/1.1.20/docs.css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="main">
+    <div>
+        <form>
+            <!----------------------------------------- logout user ---------------------------------------->
+            <div class="frame" sec:authorize="isAuthenticated()">
+                <fieldset>
+                    <legend><h5 class="action_legend">Hello user: [[${#httpServletRequest.remoteUser}]]</h5></legend>
+                    <div>
+                        <a class="link" th:href="@{/logout}">logout</a>
+                    </div>
+                </fieldset>
+            </div>
+            <!------------------------------------------- login user --------------------------------------->
+            <div class="frame" sec:authorize="!isAuthenticated()">
+                <fieldset>
+                    <legend><h5 class="action_legend">Login user</h5></legend>
+                    <div>
+                        <a class="link" th:href="@{/login}">login</a>
+                    </div>
+                </fieldset>
+            </div>
+            <!------------------------------------- registration new user ---------------------------------->
+            <div class="frame" sec:authorize="!isAuthenticated()">
+                <fieldset>
+                    <legend><h5 class="action_legend">Registration new user</h5></legend>
+                    <div>
+                        <a class="link" th:href="@{/registration}">registration</a>
+                    </div>
+                </fieldset>
+            </div>
+            <!-------------------------------------- only user page ---------------------------------------->
+            <div class="frame" sec:authorize="hasRole('ROLE_USER')">
+                <fieldset>
+                     <legend><h5 class="action_legend">Only user page</h5></legend>
+                    <div>
+                        <a class="link" th:href="@{/user}">user page</a>
+                    </div>
+                </fieldset>
+            </div>
+            <!------------------------------------- only admin page ---------------------------------------->
+            <div class="frame" sec:authorize="hasRole('ROLE_ADMIN')">
+                <fieldset>
+                    <legend><h5 class="action_legend">Only admin page</h5></legend>
+                    <div>
+                        <a class="link" th:href="@{/admin}">admin page</a>
+                    </div>
+                </fieldset>
+            </div>
+            <!------------------------------ only user and admin page -------------------------------------->
+            <div class="frame" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+                <fieldset>
+                    <legend><h5 class="action_legend">Only admin and user page</h5></legend>
+                    <div>
+                        <a class="link" th:href="@{/admin-user}">admin / user page</a>
+                    </div>
+                </fieldset>
+            </div>
+            <!----------------------------------- public page (all users) ---------------------------------->
+            <div class="frame">
+                <fieldset>
+                    <legend><h5 class="action_legend">Public page</h5></legend>
+                    <div>
+                        <a class="link" th:href="@{/public}">public page</a>
+                    </div>
+                </fieldset>
+                <!--------------------------------------- message ------------------------------------------>
+                <div class="form_message">
+                    <fieldset>
+                        <legend><h5 class="action_message">[message]:</h5></legend>
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <div class="col-md-80">
+                                    <span th:if="${userSave}" th:text="${userSave}"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <!---------------------------------------------------------------------------------------------->
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

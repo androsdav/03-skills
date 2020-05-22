@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="ENG">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring Boot MVC</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+    <link rel='stylesheet' href='https://gitcdn.xyz/cdn/angular/bower-material/v1.1.20/angular-material.css'>
+    <link rel='stylesheet' href='https://material.angularjs.org/1.1.20/docs.css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="main">
+    <!------------------------ get all user / delete user by id ------------------------>
+    <div class="frame">
+        <form>
+            <fieldset>
+                <legend><h5 class="action_legend">Admin page</h5></legend>
+                <div>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>login</th>
+                            <th>password</th>
+                            <th>role</th>
+                            <th>delete</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="user : ${users}">
+                            <td th:text="${user.id}"></td>
+                            <td th:text="${user.login}"></td>
+                            <td th:text="${user.password}"></td>
+                            <td>
+                                <th:block th:each="role : ${user.roles}" th:text="|${role.name} |"/>
+                            </td>
+                            <td><a class="link" th:href="@{/deleteUser/{id}(id=${user.id})}">delete</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </fieldset>
+            <div>
+                <div>
+                    <a class="link" th:href="@{/}"> &lArr; back</a>
+                </div>
+            </div>
+            <!----------------------------------------- message -------------------------------------------->
+            <div class="form_message">
+                <fieldset>
+                    <legend><h5 class="action_message">[message]:</h5></legend>
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <div class="col-md-80">
+                                <span th:if="${userDeleteError}" th:text="${userDeleteError}"><br></span>
+                                <span th:if="${userDelete}" th:text="${userDelete}"></span>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <!---------------------------------------------------------------------------------------------->
+        </form>
+    </div>
+</div>
+</body>
+</html>
