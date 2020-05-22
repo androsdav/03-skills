@@ -125,7 +125,6 @@ public class LoggingAspect {
         String className = methodSignature.getDeclaringType().getSimpleName();
         String methodName = methodSignature.getName();
         final StopWatch stopWatch = new StopWatch();
-        //Measure method execution time
         stopWatch.start();
         Object timeResult = proceedingJoinPoint.proceed();
         stopWatch.stop();
@@ -139,7 +138,6 @@ public class LoggingAspect {
      * @return - returns object.
      * @throws Throwable - throws.
      */
-
     @Around(value = "execution(* com.adidyk.service.*.*(..)) && args(first, second)", argNames = "joinPoint,first,second")
     public Object logAllMethodInPackageService(ProceedingJoinPoint joinPoint, double first, double second) throws Throwable {
         long start = System.currentTimeMillis();

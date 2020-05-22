@@ -27,7 +27,6 @@ public class StartUi implements CommandLineRunner {
 
     /**
      * StartUi - constructor.
-     *
      * @param storageService - composer.
      */
     @Autowired
@@ -38,7 +37,6 @@ public class StartUi implements CommandLineRunner {
 
     /**
      * main - main.
-     *
      * @param arg - arg.
      */
     public static void main(String[] arg) {
@@ -47,7 +45,6 @@ public class StartUi implements CommandLineRunner {
 
     /**
      * run - run project, testing - bad practice.
-     *
      * @param arg - arg.
      */
     @Override
