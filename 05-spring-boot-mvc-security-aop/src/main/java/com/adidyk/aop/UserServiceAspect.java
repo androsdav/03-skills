@@ -42,6 +42,11 @@ public class UserServiceAspect {
         return proceed;
     }
 
+    /**
+     * logMethodGetAllUserService -log method get all user service.
+     * @param joinPoint - join point.
+     * @param result - result.
+     */
     @AfterReturning(value = "execution(* com.adidyk.service.UserService.findAllUser())", returning = "result", argNames = "joinPoint,result")
     public void logMethodGetAllUserService(JoinPoint joinPoint,Object result) {
         this.logger.log(Level.INFO, "[INFO]: " + joinPoint.getSignature() + "; result: " + result);
