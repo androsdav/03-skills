@@ -52,4 +52,6 @@ public class UserServiceAspect {
         this.logger.log(Level.INFO, "[INFO]: " + joinPoint.getSignature() + "; result: " + result);
     }
 
+    //  now is project is consist in renamed repository
+
 }
