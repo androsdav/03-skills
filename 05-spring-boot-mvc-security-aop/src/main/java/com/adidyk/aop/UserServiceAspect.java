@@ -1,6 +1,5 @@
 package com.adidyk.aop;
 
-import com.adidyk.model.User;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -26,32 +25,30 @@ public class UserServiceAspect {
     private Logger logger = Logger.getLogger(UserServiceAspect.class.getName());
 
     /**
-     * logAllMethodUserService - log all method user service.
+     * logAllMethofUserService - log all method user service.
      * @param joinPoint - join point.
-     * @return - return proceed.
+     * @return - return method result.
      * @throws Throwable - throwable.
      */
-    @Around(value = "execution(* com.adidyk.service.UserService.*(..)) && args(user)", argNames = "joinPoint, user")
-    public Object logAllMethodUserService(ProceedingJoinPoint joinPoint, User user) throws Throwable {
+    @Around(value = "execution(* com.adidyk.service.UserService.*(..))")
+    public Object logAllMethodUserService(ProceedingJoinPoint joinPoint) throws Throwable {
         long start = System.currentTimeMillis();
         Object proceed = joinPoint.proceed();
         long executionTime = System.currentTimeMillis() - start;
-        this.logger.log(Level.INFO, "[INFO]: " + joinPoint.getSignature() + "; user: " + user +  "; execution time: "
-            + executionTime + "[ms]");
-        System.out.println((char) 27 + "[31mWarning! " + (char)27 + "[0m");
-        return proceed;
+        this.logger.log(Level.INFO, "[INFO]: " + joinPoint.getSignature() + "; execution time: "
+                + executionTime + "[ms]");
+        return  proceed;
     }
 
     /**
-     * logMethodGetAllUserService -log method get all user service.
+     * logAllMethodUserServiceReturning - log all method user service returning.
      * @param joinPoint - join point.
      * @param result - result.
      */
-    @AfterReturning(value = "execution(* com.adidyk.service.UserService.findAllUser())", returning = "result", argNames = "joinPoint,result")
-    public void logMethodGetAllUserService(JoinPoint joinPoint,Object result) {
-        this.logger.log(Level.INFO, "[INFO]: " + joinPoint.getSignature() + "; result: " + result);
-    }
+    @AfterReturning(value = "execution(* com.adidyk.service.UserService.*(..))", returning = "result")
+    public void logAllMethodUserServiceReturning(JoinPoint joinPoint, Object result) {
+        this.logger.log(Level.INFO, "[INFO]: " + joinPoint + "; returning: " + result.toString());
 
-    //  now is project is consist in renamed repository
+    }
 
 }
