@@ -1,9 +1,10 @@
 package com.adidyk;
 
-import com.adidyk.model.User;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * Class StartUi. Start project.
@@ -12,15 +13,22 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @EnableAspectJAutoProxy
 public class StartUi {
 
+    /**
+     * getRestTemplate - gets link to object class RestTemplate.
+     * @return - returns link to object of class RestTemplate.
+     */
+    @Bean
+    public RestTemplate getRestTemplate() {
+        return new RestTemplate();
+    }
+
      /**
      * main - main.
      * @param arg - arg.
      */
     public  static void main(String[] arg) {
         SpringApplication.run(StartUi.class, arg);
-        System.out.println("TEST start project");
-        User user = new User(1, "Ivan", "Ivanov");
-        System.out.println(user);
     }
+
 
 }

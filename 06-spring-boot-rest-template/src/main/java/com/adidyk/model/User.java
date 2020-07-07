@@ -34,6 +34,12 @@ public class User {
 
     /**
      * User - constructor.
+     */
+    public User() {
+    }
+
+    /**
+     * User - constructor.
      * @param id - user id.
      * @param firstName - user first name.
      * @param secondName - user second name.
