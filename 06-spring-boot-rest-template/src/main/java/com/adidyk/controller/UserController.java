@@ -5,10 +5,8 @@ import com.adidyk.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 /**
@@ -42,6 +40,20 @@ public class UserController {
     public ResponseEntity<User> saveUser(@RequestBody User user) {
         this.userService.saveUser(user);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
+    }
+
+    /**
+     * findUserById - find user by id.
+     * @param id - user id.
+     * @return - returns user by id.
+     */
+    @RequestMapping(value = "/find_user_by_id/{id}")
+    public ResponseEntity<User> findUserById(@PathVariable("id") int id) {
+        User user = this.userService.findUserById(new User(id));
+        if (user == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     /**

@@ -39,6 +39,15 @@ public class UserService {
     }
 
     /**
+     * findUserById - finds user by id and returns user.
+     * @param user - user.
+     * @return - returns user by id.
+     */
+    public User findUserById(User user) {
+        return this.userRepository.findById(user.getId()).orElse(null);
+    }
+
+    /**
      * findAllUser - finds and returns list user.
      * @return - returns list user.
      */

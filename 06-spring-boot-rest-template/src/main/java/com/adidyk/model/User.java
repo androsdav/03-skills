@@ -41,6 +41,14 @@ public class User {
     /**
      * User - constructor.
      * @param id - user id.
+     */
+    public User(int id) {
+        this.id = id;
+    }
+
+    /**
+     * User - constructor.
+     * @param id - user id.
      * @param firstName - user first name.
      * @param secondName - user second name.
      */
