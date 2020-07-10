@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 /**
@@ -38,8 +37,7 @@ public class UserController {
      */
     @RequestMapping(value = "/save_user", method = RequestMethod.POST)
     public ResponseEntity<User> saveUser(@RequestBody User user) {
-        this.userService.saveUser(user);
-        return new ResponseEntity<>(user, HttpStatus.CREATED);
+        return new ResponseEntity<>(this.userService.saveUser(user), HttpStatus.CREATED);
     }
 
     /**
@@ -47,13 +45,37 @@ public class UserController {
      * @param id - user id.
      * @return - returns user by id.
      */
-    @RequestMapping(value = "/find_user_by_id/{id}")
+    @RequestMapping(value = "/find_user_by_id/{id}", method = RequestMethod.GET)
     public ResponseEntity<User> findUserById(@PathVariable("id") int id) {
         User user = this.userService.findUserById(new User(id));
         if (user == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    /**
+     * findUserById - finds user by id.
+     * @param user - user.
+     * @return - returns user by id.
+     */
+    @RequestMapping(value = "/find_user_by_id", method = RequestMethod.POST)
+    public ResponseEntity<User> findUserById(@RequestBody User user) {
+        User userDB = this.userService.findUserById(user);
+        if (userDB == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(userDB, HttpStatus.OK);
+    }
+
+    /**
+     * updateUser - update user by id.
+     * @param user - user.
+     * @return - returns updated user.
+     */
+    @RequestMapping(value = "/update_user_by_id", method = RequestMethod.POST)
+    public ResponseEntity<User> updateUserById(@RequestBody User user) {
+        return new ResponseEntity<>(this.userService.updateUser(user), HttpStatus.OK);
     }
 
     /**

@@ -30,5 +30,4 @@ public class StartUi {
         SpringApplication.run(StartUi.class, arg);
     }
 
-
 }

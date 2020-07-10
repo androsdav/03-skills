@@ -4,7 +4,6 @@ import com.adidyk.model.User;
 import com.adidyk.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 /**
@@ -45,6 +44,21 @@ public class UserService {
      */
     public User findUserById(User user) {
         return this.userRepository.findById(user.getId()).orElse(null);
+    }
+
+    /**
+     * updateUser - update user by id.
+     * @param user - user.
+     * @return - returns updated user.
+     */
+    public User updateUser(User user) {
+        User userDB = this.findUserById(user);
+        if (userDB != null) {
+            if (user.getFirstName() != null) userDB.setFirstName(user.getFirstName());
+            if (user.getSecondName() != null) userDB.setSecondName(user.getSecondName());
+            this.saveUser(userDB);
+        }
+        return userDB;
     }
 
     /**

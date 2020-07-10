@@ -3,12 +3,8 @@ package com.adidyk.controller;
 import com.adidyk.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
-
 import java.util.*;
 
 /**
@@ -34,8 +30,115 @@ public class UserTemplateController {
         this.restTemplate = restTemplate;
     }
 
+    /*------------------------------------------ save new user -------------------------------------------------------*/
     /**
-     * ---- GET -----
+     * ---- POST NEW USER 1 ----
+     * saveUser - save new user.
+     * @param user - user.
+     */
+    @RequestMapping(value = "/template/save_user_first", method = RequestMethod.POST)
+    public User saveUserFirst(@RequestBody User user) {
+        return this.restTemplate.postForObject("http://localhost:8081/save_user", user, User.class);
+    }
+
+    /**
+     * ---- POST NEW USER 2 ----
+     * saveUser - save new user.
+     * @param user - user.
+     */
+    @RequestMapping(value = "/template/save_user_second", method = RequestMethod.POST)
+    public ResponseEntity<User> saveUserSecond(@RequestBody User user) {
+        return this.restTemplate.postForEntity("http://localhost:8081/save_user", user, User.class);
+    }
+
+    /**
+     * ---- POST NEW USER 3 ----
+     * saveUser - save new user.
+     * @param user - user.
+     */
+    @RequestMapping(value = "/template/save_user_third", method = RequestMethod.POST)
+    public ResponseEntity<User> saveUserThird(@RequestBody User user) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        HttpEntity<User> entity = new HttpEntity<>(user, headers);
+        return this.restTemplate.exchange("http://localhost:8081/save_user", HttpMethod.POST, entity, User.class);
+    }
+
+    /*----------------------------------------- find user by id ------------------------------------------------------*/
+    /**
+     * ---- GET BY ID 1 -----
+     * findUserById - find user by id.
+     * @return - returns user.
+     */
+    @RequestMapping(value = "/template/find_user_by_id/{id}", method = RequestMethod.GET)
+    public User findUserByIdFirst(@PathVariable("id") int id) {
+        Map<String, String> params = new HashMap<>();
+        params.put("id", String.valueOf(id));
+        return this.restTemplate.getForObject("http://localhost:8081/find_user_by_id/{id}", User.class, params);
+    }
+
+    /**
+     * ---- GET BY ID 2 -----
+     * findUserById - find user by id.
+     * @return - returns user.
+     */
+    @RequestMapping(value = "/template/find_user_by_id/second", method = RequestMethod.POST)
+    public User findUserByIdSecond(@RequestBody User user) {
+        Map<String, String> params = new HashMap<>();
+        params.put("id", String.valueOf(user.getId()));
+        return this.restTemplate.getForObject("http://localhost:8081/find_user_by_id/{id}", User.class, params);
+    }
+
+    /**
+     * ---- GET BY ID 3 -----
+     * findUserById - find user by id.
+     * @return - returns user.
+     */
+    @RequestMapping(value = "/template/find_user_by_id/third", method = RequestMethod.POST)
+    public User findUserByIdThird(@RequestBody User user) {
+        return this.restTemplate.postForObject("http://localhost:8081/find_user_by_id", user, User.class);
+    }
+
+    /**
+     * ---- GET BY ID 4 -----
+     * findUserById - find user by id.
+     * @return - returns user.
+     */
+    @RequestMapping(value = "/template/find_user_by_id/fourth", method = RequestMethod.POST)
+    public ResponseEntity<User> findUserByIdFourth(@RequestBody User user) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        HttpEntity<User> entity = new HttpEntity<>(user, headers);
+        return this.restTemplate.exchange("http://localhost:8081/find_user_by_id", HttpMethod.POST, entity, User.class);
+    }
+
+    /*---------------------------------------- update user by id -----------------------------------------------------*/
+    /**
+     * ---- POST UPDATE BY ID 3 -----
+     * findUserById - find user by id.
+     * @return - returns user.
+     */
+    @RequestMapping(value = "/template/update_user_by_id/first", method = RequestMethod.POST)
+    public User updateUserByIdFirst(@RequestBody User user) {
+        return this.restTemplate.postForObject("http://localhost:8081/update_user_by_id", user, User.class);
+    }
+
+    /**
+     * ---- GET BY ID 4 -----
+     * findUserById - find user by id.
+     * @return - returns user.
+     */
+    @RequestMapping(value = "/template/update_user_by_id/second", method = RequestMethod.POST)
+    public ResponseEntity<User> updateUserByIdSecond(@RequestBody User user) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        HttpEntity<User> entity = new HttpEntity<>(user, headers);
+        return this.restTemplate.exchange("http://localhost:8081/update_user_by_id", HttpMethod.POST, entity, User.class);
+    }
+
+    /*----------------------------------------- Find all user --------------------------------------------------------*/
+    /**
+     * ---- GET ALL 1 -----
      * findAllUser - returns all user in string format.
      * getForObject - get for object -> string format.
      * @return - returns all user in string format.
@@ -46,7 +149,7 @@ public class UserTemplateController {
     }
 
     /**
-     * ---- GET 1 -----
+     * ---- GET ALL 2 -----
      * findAllUser - returns all user in string format.
      * getForObject - get for object -> user format.
      * @return - returns all user in json format.
@@ -58,7 +161,7 @@ public class UserTemplateController {
     }
 
     /**
-     * ---- GET 2 -----
+     * ---- GET ALL 3 -----
      * findAllUser - returns all user in string format.
      * getForObject - get for object -> user format.
      * @return - returns all user in json format.
@@ -70,7 +173,7 @@ public class UserTemplateController {
     }
 
     /**
-     * ---- GET 3 -----
+     * ---- GET ALL 4 -----
      * findAllUser - returns all user in string format.
      * getForObject - get for object -> entity.
      * @return - returns all user in json format.
@@ -81,7 +184,7 @@ public class UserTemplateController {
     }
 
     /**
-     * ---- GET 4 -----
+     * ---- GET ALL 5 -----
      * findAllUserExchange - find all user exchange.
      * exchange - support request headers.
      * @return - return string format.
@@ -92,18 +195,6 @@ public class UserTemplateController {
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         HttpEntity<String> entity = new HttpEntity<>(headers);
         return this.restTemplate.exchange("http://localhost:8081/find_all_user", HttpMethod.GET, entity, String.class);
-    }
-
-    /**
-     * ---- GET 5 -----
-     * findUserById - find user by id.
-     * @return - returns user.
-     */
-    @RequestMapping(value = "/template/find_user_by_id", method = RequestMethod.GET)
-    public User findUserById(@RequestBody User user) {
-        Map<String, String> params = new HashMap<>();
-        params.put("id", String.valueOf(user.getId()));
-        return this.restTemplate.getForObject("http://localhost:8081/find_user_by_id/{id}", User.class, params);
     }
 
 }
