@@ -7,7 +7,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.web.client.RestTemplate;
 
 /**
- * Class StartUi. Start project.
+ * Class StartUi. Start project. :-(
  */
 @SpringBootApplication
 @EnableAspectJAutoProxy
