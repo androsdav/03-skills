@@ -197,4 +197,21 @@ public class UserTemplateController {
         return this.restTemplate.exchange("http://localhost:8081/find_all_user", HttpMethod.GET, entity, String.class);
     }
 
+    /*
+    /**
+     * ---- GET ALL 5 -----
+     * findAllUserExchange - find all user exchange.
+     * exchange - support request headers.
+     * @return - return string format.
+     */
+    /*
+    @RequestMapping(value = "/template/find_all_user/exchange/json", method = RequestMethod.GET)
+    public ResponseEntity<String> findAllUserExchange() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+        return this.restTemplate.exchange("http://localhost:8081/find_all_user", HttpMethod.GET, entity, String.class);
+    }
+    */
+
 }
