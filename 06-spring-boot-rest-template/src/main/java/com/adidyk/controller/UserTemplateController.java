@@ -33,7 +33,7 @@ public class UserTemplateController {
     /*------------------------------------------ save new user -------------------------------------------------------*/
     /**
      * ---- POST NEW USER 1 ----
-     * saveUser - save new user.
+     * saveUserFirst - save new user.
      * @param user - user.
      */
     @RequestMapping(value = "/template/save_user_first", method = RequestMethod.POST)
@@ -43,7 +43,7 @@ public class UserTemplateController {
 
     /**
      * ---- POST NEW USER 2 ----
-     * saveUser - save new user.
+     * saveUserSecond - save new user.
      * @param user - user.
      */
     @RequestMapping(value = "/template/save_user_second", method = RequestMethod.POST)
@@ -53,7 +53,7 @@ public class UserTemplateController {
 
     /**
      * ---- POST NEW USER 3 ----
-     * saveUser - save new user.
+     * saveUserThird - save new user.
      * @param user - user.
      */
     @RequestMapping(value = "/template/save_user_third", method = RequestMethod.POST)
@@ -67,19 +67,19 @@ public class UserTemplateController {
     /*----------------------------------------- find user by id ------------------------------------------------------*/
     /**
      * ---- GET BY ID 1 -----
-     * findUserById - find user by id.
+     * findUserByIdFirst - find user by id.
      * @return - returns user.
      */
     @RequestMapping(value = "/template/find_user_by_id/{id}", method = RequestMethod.GET)
-    public User findUserByIdFirst(@PathVariable("id") int id) {
+    public ResponseEntity<User> findUserByIdFirst(@PathVariable("id") int id) {
         Map<String, String> params = new HashMap<>();
         params.put("id", String.valueOf(id));
-        return this.restTemplate.getForObject("http://localhost:8081/find_user_by_id/{id}", User.class, params);
+        return this.restTemplate.getForEntity("http://localhost:8081/find_user_by_id/{id}", User.class, params);
     }
 
     /**
      * ---- GET BY ID 2 -----
-     * findUserById - find user by id.
+     * findUserByIdSecond - find user by id.
      * @return - returns user.
      */
     @RequestMapping(value = "/template/find_user_by_id/second", method = RequestMethod.POST)
@@ -91,7 +91,8 @@ public class UserTemplateController {
 
     /**
      * ---- GET BY ID 3 -----
-     * findUserById - find user by id.
+     * findUserByIdThird - find user by id.
+     * @param user - user.
      * @return - returns user.
      */
     @RequestMapping(value = "/template/find_user_by_id/third", method = RequestMethod.POST)
@@ -102,6 +103,7 @@ public class UserTemplateController {
     /**
      * ---- GET BY ID 4 -----
      * findUserById - find user by id.
+     * @param user - user.
      * @return - returns user.
      */
     @RequestMapping(value = "/template/find_user_by_id/fourth", method = RequestMethod.POST)
@@ -116,6 +118,7 @@ public class UserTemplateController {
     /**
      * ---- POST UPDATE BY ID 3 -----
      * findUserById - find user by id.
+     * @param user - user.
      * @return - returns user.
      */
     @RequestMapping(value = "/template/update_user_by_id/first", method = RequestMethod.POST)
@@ -126,6 +129,7 @@ public class UserTemplateController {
     /**
      * ---- GET BY ID 4 -----
      * findUserById - find user by id.
+     * @param user - user.
      * @return - returns user.
      */
     @RequestMapping(value = "/template/update_user_by_id/second", method = RequestMethod.POST)
@@ -134,6 +138,67 @@ public class UserTemplateController {
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         HttpEntity<User> entity = new HttpEntity<>(user, headers);
         return this.restTemplate.exchange("http://localhost:8081/update_user_by_id", HttpMethod.POST, entity, User.class);
+    }
+
+    /**
+     * ---- GET BY ID 5 -----
+     * findUserById - find user by id.
+     * @param user - user.
+     * @return - returns user.
+     */
+    @RequestMapping(value = "/template/update_user_by_id/third/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<User> updateUserByIdThirdFourth(@PathVariable("id") String id, @RequestBody User user) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        HttpEntity<User> entity = new HttpEntity<>(user, headers);
+        return this.restTemplate.exchange("http://localhost:8081/update_user_by_id/" + id, HttpMethod.PUT, entity, User.class);
+    }
+
+    /**
+     * ---- GET BY ID 6 ----
+     * updateUserByIdThird - updates user by id.
+     * @param user - user.
+     */
+    @RequestMapping(value = "/template/update_user_by_id/fourth", method = RequestMethod.POST)
+    public void updateUserByIdFourth(@RequestBody User user) {
+        Map<String, String> params = new HashMap<>();
+        params.put("id", String.valueOf(user.getId()));
+        this.restTemplate.put("http://localhost:8081/update_user_by_id/{id}", user, params);
+    }
+
+    /*---------------------------------------- delete user by id -----------------------------------------------------*/
+    /**
+     * deleteUserById - delete user by id.
+     * @param user - user.
+     * @return - returns deleted user.
+     */
+    @RequestMapping(value = "/template/delete_user_by_id", method = RequestMethod.POST)
+    public ResponseEntity<User> deleteUserById(@RequestBody User user) {
+        return this.restTemplate.postForEntity("http://localhost:8081/delete_user_by_id", user, User.class);
+    }
+
+    /**
+     * deleteUserById - delete user by id.
+     * @param id - user id.
+     */
+    @RequestMapping(value = "/template/delete_user_by_id/first/{id}", method = RequestMethod.DELETE)
+    public void deleteUseByIdFirst(@PathVariable("id") int id) {
+        Map<String, String> params = new HashMap<>();
+        params.put("id", String.valueOf(id));
+        this.restTemplate.delete("http://localhost:8081/delete_user_by_id/{id}", params);
+    }
+
+    /**
+     * deleteUserByIdSecond - delete user by id.
+     * @param id - user id.
+     * @return - returns deleted user.
+     */
+    @RequestMapping(value = "/template/delete_user_by_id/second/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<User> deleteUserByIdSecond(@PathVariable("id") int id) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        HttpEntity<User> entity = new HttpEntity<>(headers);
+        return this.restTemplate.exchange("http://localhost:8081/delete_user_by_id/" + id, HttpMethod.DELETE, entity, User.class);
     }
 
     /*----------------------------------------- Find all user --------------------------------------------------------*/
@@ -192,26 +257,9 @@ public class UserTemplateController {
     @RequestMapping(value = "/template/find_all_user/exchange/json", method = RequestMethod.GET)
     public ResponseEntity<String> findAllUserExchange() {
         HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         HttpEntity<String> entity = new HttpEntity<>(headers);
         return this.restTemplate.exchange("http://localhost:8081/find_all_user", HttpMethod.GET, entity, String.class);
     }
-
-    /*
-    /**
-     * ---- GET ALL 5 -----
-     * findAllUserExchange - find all user exchange.
-     * exchange - support request headers.
-     * @return - return string format.
-     */
-    /*
-    @RequestMapping(value = "/template/find_all_user/exchange/json", method = RequestMethod.GET)
-    public ResponseEntity<String> findAllUserExchange() {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-        HttpEntity<String> entity = new HttpEntity<>(headers);
-        return this.restTemplate.exchange("http://localhost:8081/find_all_user", HttpMethod.GET, entity, String.class);
-    }
-    */
 
 }

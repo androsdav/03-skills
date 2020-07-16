@@ -79,6 +79,38 @@ public class UserController {
     }
 
     /**
+     * updateUserByIdPUT - updates user by id.
+     * @param id - user id.
+     * @param user - user.
+     * @return - returns user update.
+     */
+    @RequestMapping(value = "update_user_by_id/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<User> updateUserByIdPUT(@PathVariable("id") int id, @RequestBody User user) {
+        user.setId(id);
+        return new ResponseEntity<>(this.userService.updateUser(user), HttpStatus.OK);
+    }
+
+    /**
+     * deleteUserById - delete user by id.
+     * @param user - user.
+     * @return - returns deleted user.
+     */
+    @RequestMapping(value = "/delete_user_by_id", method = RequestMethod.POST)
+    public ResponseEntity<User> deleteUserById(@RequestBody User user) {
+        return new ResponseEntity<>(this.userService.deleteUser(user), HttpStatus.OK);
+    }
+
+    /**
+     * deleteUsrById - delete user by id.
+     * @param id - user id.
+     * @return - returns deleted user.
+     */
+    @RequestMapping(value = "/delete_user_by_id/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<User> deleteUserById(@PathVariable("id") int id) {
+        return new ResponseEntity<>(this.userService.deleteUser(new User(id)), HttpStatus.OK);
+    }
+
+    /**
      * findAllUser - finds and returns list user.
      * @return - returns list user.
      */
