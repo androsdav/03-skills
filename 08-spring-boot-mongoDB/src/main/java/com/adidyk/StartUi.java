@@ -13,7 +13,7 @@ import java.net.UnknownHostException;
 import java.util.List;
 
 /**
- * Class StartUi. Start project.
+ * Class StartUi. Start project. :-(
  */
 @SpringBootApplication
 @EnableAspectJAutoProxy
