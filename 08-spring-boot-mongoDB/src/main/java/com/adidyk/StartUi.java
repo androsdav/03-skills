@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.web.client.RestTemplate;
 
-import com.mongodb.client.MongoClient;
+import com.mongodb.MongoClient;
 import java.net.UnknownHostException;
 import java.util.List;
 
@@ -32,8 +32,8 @@ public class StartUi {
      * main - main.
      * @param arg - arg.
      */
-    public  static void main(String[] arg)  throws UnknownHostException {
-        SpringApplication.run(StartUi.class, arg);
+    public  static void main(String[] arg) {
+
         MongoClient mongo = new MongoClient("localhost", 27017);
 
         List<String> dbs = mongo.getDatabaseNames();
