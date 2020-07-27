@@ -1,0 +1,171 @@
+/******************************************* MongoDB console commands *******************************************/
+
+/* start mongo shell */
+mongo
+
+/* checking service status */
+sudo systemctl status mongodb
+
+/* stop service */
+sudo systemctl stop mongodb
+
+/* start service */
+sudo systemctl start mongodb
+
+/* restart service */
+sudo systemctl restart mongodb
+
+/* disable automatic service start */
+sudo systemctl disable mongodb
+
+/* enable automatic service start */
+sudo systemctl enable mongodb
+
+/* connect to server and check work database */
+mongo --eval 'db.runCommand({ connectionStatus: 1 })'
+
+/* version mongoDB */
+mongo --version
+
+/******************************************* MongoDB Shell commands *******************************************/
+
+/* view all available database*/
+show db
+
+/* show collections */
+show collections
+
+/* current database*/
+db
+
+/* statistics on the current database */
+db.stats()
+
+/* switches to database user_store*/
+use user_store
+
+/* insert one document to database */
+db.users.insertOne({
+    "name" : "Albert",
+    "age" : 12,
+    "pet" : {
+        "type" : "dog",
+        "name" : "wolf"
+    },
+    "languages" : ["english", "german", "spanish"]
+})
+
+/* insert many document */
+db.users.insertMany([
+    {
+        "name" : "Amanda",
+        "age" : 14,
+        "pet" : {
+            "type" : "cat",
+            "name" : "puma"
+        },
+        "languages" : ["english", "ukrainian"]
+    },
+    {
+        "name" : "Bob",
+                "age" : 16,
+                "pet" : {
+                    "type" : "parrot",
+                    "name" : "pirate"
+                },
+                "languages" : ["english", "ukrainian", "russian"]
+    }
+])
+
+/* insert one or many document */
+db.users.insert([
+    {
+        "name" : "Adam",
+        "age" : 16,
+        "pet" : {
+            "type" : "cat",
+            "name" : "jaguar"
+        },
+        "languages" : ["english", "ukrainian", "russian"]
+    },
+    {
+        "name" : "Adolf",
+                "age" : 22,
+                "pet" : {
+                    "type" : "parrot",
+                    "name" : "pirate"
+                },
+                "languages" : ["german"]
+    }
+])
+
+/* insert document from document */
+document = ({
+    "name" : "Helen",
+    "age" : 32,
+    "pet" : {
+        "type" : "dog",
+        "name" : "nick"
+    },
+    "languages" : ["german", "spanish"]
+})
+
+db.users.insert(document)
+
+/* load documents from file */
+load("/home/andrey/D/05 Project/03-skills/08-spring-boot-mongoDB/src/main/resources/users.js")
+
+/* find all object from database */
+db.users.find()
+
+/* find all object from database */
+db.users.find().pretty()
+
+/******************************************* Filters *******************************************/
+db.users.find({"name" : "Amanda"})
+db.users.find({"age" : 16})
+db.users.find({"pet.type" : "dog"})
+db.users.find({"pet.name" : "puma"})
+db.users.find({"age" : 16,  "languages" : "english"})
+db.users.find({"languages" : "english"})
+db.users.find({"languages" : ["english"]})
+db.users.find({"languages" : ["english", "ukrainian", "russian"]})
+db.users.find({"languages" : "english", "languages" : "ukrainian"})
+db.users.find({"languages.0" : "english"})
+db.users.find({"languages.0" : "english", "languages.2" : "spanish"})
+
+/***************************************** Projection *****************************************/
+db.users.find({"pet.type" : "dog"}, {"languages" : false})
+db.users.find({}, {"languages" : false, "age" : false})
+db.users.find({}, {"name" : true, "age" : true})
+
+/******************************************** Sort ********************************************/
+db.users.find({}, {"name" : true}).sort({"name" : 1})
+db.users.find({}, {"name" : true, "age" : true}).sort({"age" : 1})
+
+/*************************************** Limit / Skip *****************************************/
+db.users.find({}, {"name" : true, "age" : true}).limit(10).sort({"age" : 1}).pretty()
+db.users.find({}, {"name" : true, "age" : true}).limit(10).skip(4).sort({"age" : 1}).pretty()
+db.users.find({}, {"name" : true, "age" : true}).sort({"age" : 1}).skip(4).limit(10).pretty()
+db.users.findOne({"pet.type" : "dog"})
+/******************************************* JavaScript *******************************************/
+fn = function() {
+    return this.age == 16;
+}
+db.users.find(fn)
+fn = function() {
+    return this.age > 16;
+}
+db.users.find(fn)
+fn = function() {
+    return this.name == "Adolf";
+}
+db.users.find(fn)
+function sqrt(n) {
+    return n*n;
+}
+sqrt(5)
+
+/******************************************* Regular *******************************************/
+db.users.find({name:/A\w+/i})
+
