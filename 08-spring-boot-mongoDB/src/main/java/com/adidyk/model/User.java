@@ -1,6 +1,8 @@
 package com.adidyk.model;
 
-import javax.persistence.*;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
 import java.util.Objects;
 
 /**
@@ -9,27 +11,25 @@ import java.util.Objects;
  * @since 06.06.2020.
  * @version 1.0.
  */
-@Entity
-@Table(name = "users")
+@Document(collection = "users")
 public class User {
 
     /**
      * @param id - user id.
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     /**
      * @param firstName - use first name.
      */
-    @Column(name = "first_name")
+    @Field(name = "first_name")
     private String firstName;
 
     /**
      * @param secondName - user second name.
      */
-    @Column(name = "second_name")
+    @Field(name = "second_name")
     private String secondName;
 
     /**
