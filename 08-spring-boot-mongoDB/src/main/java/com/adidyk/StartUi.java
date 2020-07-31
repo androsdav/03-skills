@@ -1,30 +1,34 @@
 package com.adidyk;
 
-
-
+import com.adidyk.model.User;
+import com.adidyk.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.web.client.RestTemplate;
 
 /**
  * Class StartUi. Start project. :-(
  */
 @SpringBootApplication
-@EnableAspectJAutoProxy
-public class StartUi {
+
+public class StartUi implements CommandLineRunner {
 
     /**
-     * getRestTemplate - gets link to object class RestTemplate.
-     * @return - returns link to object of class RestTemplate.
+     * @pram userService - user serice.
      */
-    @Bean
-    public RestTemplate getRestTemplate() {
-        return new RestTemplate();
+    private UserService userService;
+
+    /**
+     * StartUi - constructor.
+     * @param userService - user service.
+     */
+    @Autowired
+    public StartUi(UserService userService) {
+        this.userService = userService;
     }
 
-     /**
+    /**
      * main - main.
      * @param arg - arg.
      */
@@ -32,4 +36,10 @@ public class StartUi {
         SpringApplication.run(StartUi.class, arg);
     }
 
+    @Override
+    public void run(String... args) throws Exception {
+       // User user = new User("Bred", "Pitt");
+       // this.userService.saveUser(user);
+
+    }
 }

@@ -11,6 +11,6 @@ import org.springframework.stereotype.Repository;
  * @version 1.0.
  */
 @Repository
-public interface UserRepository extends MongoRepository<User, Integer> {
+public interface UserRepository extends MongoRepository<User, String> {
 
 }

@@ -1,5 +1,7 @@
 package com.adidyk.model;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -18,7 +20,7 @@ public class User {
      * @param id - user id.
      */
     @Id
-    private int id;
+    private String id;
 
     /**
      * @param firstName - use first name.
@@ -42,18 +44,17 @@ public class User {
      * User - constructor.
      * @param id - user id.
      */
-    public User(int id) {
+    public User(String id) {
         this.id = id;
     }
 
     /**
      * User - constructor.
-     * @param id - user id.
      * @param firstName - user first name.
      * @param secondName - user second name.
      */
-    public User(int id, String firstName, String secondName) {
-        this.id = id;
+    @PersistenceConstructor
+    public User(String firstName, String secondName) {
         this.firstName = firstName;
         this.secondName = secondName;
     }
@@ -62,7 +63,7 @@ public class User {
      * getId - returns user id.
      * @return - returns user id.
      */
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -70,7 +71,7 @@ public class User {
      * setId - sets user id.
      * @param id - user id.
      */
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -116,7 +117,7 @@ public class User {
         if (this == o) return true;
         if (!(o instanceof User)) return false;
         User user = (User) o;
-        return id == user.id &&
+        return Objects.equals(id, user.id) &&
                 Objects.equals(firstName, user.firstName) &&
                 Objects.equals(secondName, user.secondName);
     }
@@ -127,7 +128,7 @@ public class User {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, secondName);
+        return Objects.hash(firstName, secondName);
     }
 
     /**
