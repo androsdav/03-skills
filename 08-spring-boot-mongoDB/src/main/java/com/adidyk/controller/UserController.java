@@ -83,35 +83,34 @@ public class UserController {
      * @param user - user.
      * @return - returns user update.
      */
-    /*
     @RequestMapping(value = "update_user_by_id/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<User> updateUserByIdPUT(@PathVariable("id") int id, @RequestBody User user) {
+    public ResponseEntity<User> updateUserByIdPUT(@PathVariable("id") String id, @RequestBody User user) {
         user.setId(id);
-        return new ResponseEntity<>(this.userService.updateUser(user), HttpStatus.OK);
-    }*/
+        Optional<User> userDB = this.userService.updateUser(user);
+        return userDB.map(user1 -> new ResponseEntity<>(user1, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
 
     /**
      * deleteUserById - delete user by id.
      * @param user - user.
      * @return - returns deleted user.
      */
-    /*
     @RequestMapping(value = "/delete_user_by_id", method = RequestMethod.POST)
     public ResponseEntity<User> deleteUserById(@RequestBody User user) {
-        return new ResponseEntity<>(this.userService.deleteUser(user), HttpStatus.OK);
-    }*/
+        Optional <User> userDB = this.userService.deleteUser(user);
+        return userDB.map(user1 -> new ResponseEntity<>(user1, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
 
     /**
      * deleteUsrById - delete user by id.
      * @param id - user id.
      * @return - returns deleted user.
      */
-    /*
     @RequestMapping(value = "/delete_user_by_id/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<User> deleteUserById(@PathVariable("id") int id) {
-        return new ResponseEntity<>(this.userService.deleteUser(new User(id)), HttpStatus.OK);
+    public ResponseEntity<User> deleteUserById(@PathVariable("id") String id) {
+        Optional <User> userDB = this.userService.deleteUser(new User(id));
+        return userDB.map(user1 -> new ResponseEntity<>(user1, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
-    */
 
     /**
      * findAllUser - finds and returns list user.

@@ -62,17 +62,19 @@ public class UserService {
         return userDB;
     }
 
+
     /**
      * deleteUserById - delete user by id.
      * @param user - user.
      * @return - returns deleted user.
      */
-    /*
-    public User deleteUser(User user) {
-        User userDB = this.findUserById(user);
-        if (userDB != null) this.userRepository.deleteById(user.getId());
+    public Optional<User> deleteUser(User user) {
+        Optional<User> userDB = this.findUserById(user);
+        if (userDB.isPresent()) {
+            this.userRepository.deleteById(user.getId());
+        }
         return userDB;
-    }*/
+    }
 
     /**
      * findAllUser - finds and returns list user.
