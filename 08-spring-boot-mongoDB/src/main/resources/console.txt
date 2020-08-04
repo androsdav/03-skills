@@ -265,7 +265,6 @@ db.users.find({languages: {$size: 1}}).pretty()
 db.users.find({languages: {$size: 3}}).pretty()
 /* $elemMatch: определяет условие, которым должны соответствовать элемены в массиве */
 
-
 db.grades.insertMany([
     {
     student: "Tom",
@@ -298,4 +297,3 @@ sqrt(5)
 
 /******************************************* Regular *******************************************/;(
 db.users.find({name:/A\w+/i})
-
