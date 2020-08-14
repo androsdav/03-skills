@@ -13,7 +13,7 @@ public class Controller {
      * getMassage - get message.
      * @return - returns message about first eureka client.
      */
-    @RequestMapping(value = "/get0message", method = RequestMethod.GET)
+    @RequestMapping(value = "/get_message", method = RequestMethod.GET)
     public ResponseEntity<String> getMassage() {
         return new ResponseEntity<>("is first eureka client", HttpStatus.OK);
     }

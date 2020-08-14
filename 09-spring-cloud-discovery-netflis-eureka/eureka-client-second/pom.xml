@@ -6,7 +6,7 @@
     <!-- artifactId -->
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.adidyk</groupId>
-    <artifactId>eureka-server</artifactId>
+    <artifactId>eureka-client-second</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
@@ -27,6 +27,12 @@
 
     <!-- dependencies -->
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>2.2.4.RELEASE</version>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -37,8 +43,8 @@
         <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-eureka-server -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-eureka-server</artifactId>
-            <version>1.4.7.RELEASE</version>
+            <artifactId>spring-cloud-starter-eureka</artifactId>
+            <version>1.4.0.RELEASE</version>
         </dependency>
     </dependencies>
 
