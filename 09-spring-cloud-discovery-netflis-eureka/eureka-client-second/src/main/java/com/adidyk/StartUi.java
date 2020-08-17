@@ -11,6 +11,10 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @EnableDiscoveryClient
 public class StartUi {
 
+    /**
+     * main - main method.
+     * @param args - args.
+     */
     public static void main(String [] args) {
         SpringApplication.run(StartUi.class, args);
     }

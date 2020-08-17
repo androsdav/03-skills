@@ -13,9 +13,9 @@ public class Controller {
      * getMassage - get message.
      * @return - returns message about first eureka client.
      */
-    @RequestMapping(value = "/echo_first_client", method = RequestMethod.GET)
+    @RequestMapping(value = "/echo_second_client", method = RequestMethod.GET)
     public ResponseEntity<String> getMassage() {
-        return new ResponseEntity<>("is first eureka client", HttpStatus.OK);
+        return new ResponseEntity<>("is second eureka client", HttpStatus.OK);
     }
 
 }
