@@ -6,7 +6,7 @@
     <!-- artifactId -->
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.adidyk</groupId>
-    <artifactId>transort</artifactId>
+    <artifactId>transport</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
