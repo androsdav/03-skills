@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Interface TransportRepository used for access to data base.
@@ -23,15 +24,14 @@ public interface TransportRepository extends JpaRepository<Transport, Integer> {
      * @param type - type transport.
      * @return - returns list result search.
      */
-    @Query(value = "select t from Transport as t inner join fetch t.typeTransport " +
-            "where (t.typeTransport.name = :type and t.price > :price)")
-    List<Transport> findAllTransportByPriceAndByType(@Param("price")Float price, @Param("type") String type);
+    @Query(value = "select t from Transport as t inner join fetch t.typeTransport where (t.typeTransport.name = :type and t.price > :price)")
+    Optional<List<Transport>> findAllTransportByPriceAndByType(@Param("price")Float price, @Param("type") String type);
 
     /**
      * findAllTransport - finds all transport and returns all result (list transport) search.
      * @return - returns all result (list transport) search.
      */
     @Query(value = "select t from Transport as t inner join fetch t.typeTransport")
-    List<Transport> findAllTransport();
+    Optional<List<Transport>> findAllTransport();
 
 }
