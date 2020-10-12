@@ -3,11 +3,12 @@ package com.adidyk.controller;
 import com.adidyk.model.Transport;
 import com.adidyk.service.TransportService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Class TransportController.
@@ -39,19 +40,20 @@ public class TransportController {
      * @param type - type transport.
      * @return - returns list result search.
      */
-    @RequestMapping(value = "/find_all_transport_by_price_and_type/{price}/{type}", method = RequestMethod.GET)
-    public List<Transport> findAllTransportByPriceAndByType(@PathVariable("price") Float price,
-                                                            @PathVariable("type") String type) {
-        return this.transportService.findAllTransportByPriceAndByType(price, type);
+    @RequestMapping(value = "/transport/", method = RequestMethod.GET)
+    public ResponseEntity<List<Transport>> findAllTransportByPriceAndByType(@RequestParam("price") Float price, @RequestParam("type") String type) {
+        Optional<List<Transport>> result = this.transportService.findAllTransportByPriceAndByType(price, type);
+        return result.map(transports -> new ResponseEntity<>(transports, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     /**
      * findAllTransport - finds all transport and returns all result (list transport) search.
      * @return - returns all result (list transport) search.
      */
-    @RequestMapping(value = "/find_all_transport", method = RequestMethod.GET)
-    public List<Transport> findAllTransport() {
-        return this.transportService.findAllTransport();
+    @RequestMapping(value = "/transport", method = RequestMethod.GET)
+    public ResponseEntity<List<Transport>> findAllTransport() {
+        Optional<List<Transport>> result = this.transportService.findAllTransport();
+        return result.map(transports -> new ResponseEntity<>(transports, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
 }
